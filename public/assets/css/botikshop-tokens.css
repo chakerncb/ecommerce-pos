@@ -1,0 +1,98 @@
+/*======================================
+    BotikShop Design Tokens
+    Loaded AFTER bootstrap.min.css / bootstrap.rtl.min.css
+    Overrides Bootstrap CSS custom props
+    + defines BotikShop token system for Household & Kitchenware Store
+========================================*/
+
+/* ─── Fonts ─── */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&display=swap');
+
+/* ─── Design Tokens ─── */
+:root {
+  /* Color Palette */
+  --bk-bg:           #F7F4EF;   /* Warm oat-white background */
+  --bk-surface:      #FFFFFF;   /* Cards and modal surface background */
+  --bk-ink:          #26211A;   /* Warm dark charcoal text */
+  --bk-accent:       #C84B2F;   /* Brand Rust-Red primary */
+  --bk-accent-hover: #A33520;   /* Deeper rust for hover/active */
+  --bk-promo:        #B5882A;   /* Muted warm amber for sale/promo badges */
+  --bk-grey-1:       #E0DAD2;   /* Warm light grey for borders/dividers */
+  --bk-grey-2:       #8C8278;   /* Warm mid-grey for secondary/muted text */
+  --bk-white:        #FFFFFF;
+
+  /* Typography */
+  --font-display:    'Amiri', serif;
+  --font-body:       'Cairo', sans-serif;
+
+  /* Type scale */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-lg:   20px;
+  --text-xl:   28px;
+  --text-2xl:  40px;
+
+  /* Elevation (Warm Charcoal Tint) */
+  --shadow-sm: 0 1px 3px rgba(38,33,26,0.06), 0 1px 2px rgba(38,33,26,0.04);
+  --shadow-md: 0 4px 12px rgba(38,33,26,0.09), 0 2px 4px rgba(38,33,26,0.05);
+  --shadow-lg: 0 12px 32px rgba(38,33,26,0.13), 0 4px 8px rgba(38,33,26,0.07);
+
+  /* Corner Radius Scale */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+
+  /* Glass Effect (Overlay UI only) */
+  --glass-bg:     rgba(247,244,239,0.85);
+  --glass-blur:   blur(16px) saturate(180%);
+  --glass-border: 1px solid rgba(224,218,210,0.6);
+
+  /* Motion & Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+
+  /* Override Bootstrap 5 CSS custom properties */
+  --bs-primary:          #C84B2F;
+  --bs-primary-rgb:      200, 75, 47;
+  --bs-body-font-family: 'Cairo', sans-serif;
+  --bs-body-font-size:   16px;
+  --bs-body-color:       #26211A;
+  --bs-body-bg:          #F7F4EF;
+  --bs-border-radius:    6px;
+  --bs-border-color:     #E0DAD2;
+}
+
+/* ─── Dark Mode Tokens ─── */
+html.dark-mode {
+  --bk-bg:           #1A1714;
+  --bk-surface:      #24201C;
+  --bk-ink:          #F4EFEA;
+  --bk-accent:       #E05D41;
+  --bk-accent-hover: #F27257;
+  --bk-promo:        #D4A23D;
+  --bk-grey-1:       #3D3730;
+  --bk-grey-2:       #A3988C;
+  --bk-white:        #24201C;
+
+  --glass-bg:        rgba(26,23,20,0.85);
+  --glass-border:    1px solid rgba(255,255,255,0.08);
+
+  --bs-body-color:    #F4EFEA;
+  --bs-body-bg:       #1A1714;
+  --bs-border-color:  #3D3730;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
