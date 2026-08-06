@@ -1,12 +1,13 @@
 <div>
-    <a href="{{route('cart.store')}}" class="main-btn">
+    <a href="#" class="main-btn">
+    <!-- <a href="{{route('cart.store')}}" class="main-btn"> -->
         <i class="lni lni-cart"></i>
         <span class="total-items">{{$cartCount}}</span>
     </a>
     <div class="shopping-item">
         <div class="dropdown-cart-header">
             <span>{{$cartCount}} Items</span>
-            <a href="{{route('cart.store')}}">View Cart</a>
+            <!-- <a href="{{route('cart.store')}}">View Cart</a> -->
     </div>
    <ul class="shopping-list">
         @foreach ($cartItems as $item)

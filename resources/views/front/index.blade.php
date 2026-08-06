@@ -140,38 +140,45 @@
                     <div class="slider-head">
                         <!-- Start Hero Slider -->
                         <div class="hero-slider">
-                            <!-- Start Single Slider -->
-                            <div class="single-slider"
-                                style="background-image: URL({{URL::asset('assets/images/hero/slider-bg1.jpg')}});">
-                                <div class="content">
-                                    <h2><span>No restocking fee ($35 savings)</span>
-                                        M75 Sport Watch
-                                    </h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <h3><span>Now Only</span> $320.99</h3>
-                                    <div class="button">
-                                        <a href="product-grids.html" class="btn">Shop Now</a>
+                            @if(isset($trendingProducts) && count($trendingProducts) > 0)
+                                @foreach ($trendingProducts as $product)
+                                    @php
+                                        $imgPath = $product->feature_image ?: asset('assets/images/hero/slider-bg1.jpg');
+                                    @endphp
+                                    <!-- Start Single Slider -->
+                                    <div class="single-slider"
+                                        style="background-image: URL('{{ $imgPath }}');">
+                                        <div class="content">
+                                            <h2><span>Trending Now</span>
+                                                {{ $product->name }}
+                                            </h2>
+                                            <p>{{ Str::limit(strip_tags($product->about ?? $product->description ?? 'Check out our top trending product with best deals.'), 120) }}</p>
+                                            <h3><span>Now Only</span> {{ number_format($product->price, 2) }} DA</h3>
+                                            <div class="button">
+                                                <a href="{{ route('product.details', $product->name) }}" class="btn">Shop Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Single Slider -->
+                                @endforeach
+                            @else
+                                <!-- Start Single Slider Fallback -->
+                                <div class="single-slider"
+                                    style="background-image: URL({{URL::asset('assets/images/hero/slider-bg1.jpg')}});">
+                                    <div class="content">
+                                        <h2><span>No restocking fee ($35 savings)</span>
+                                            M75 Sport Watch
+                                        </h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.</p>
+                                        <h3><span>Now Only</span> $320.99</h3>
+                                        <div class="button">
+                                            <a href="{{ route('shop.index') }}" class="btn">Shop Now</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- End Single Slider -->
-                            <!-- Start Single Slider -->
-                            <div class="single-slider"
-                                style="background-image: URL({{URL::asset('assets/images/hero/slider-bg2.jpg')}});">
-                                <div class="content">
-                                    <h2><span>Big Sale Offer</span>
-                                        Get the Best Deal on CCTV Camera
-                                    </h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <h3><span>Combo Only:</span> $590.00</h3>
-                                    <div class="button">
-                                        <a href="product-grids.html" class="btn">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Slider -->
+                                <!-- End Single Slider Fallback -->
+                            @endif
                         </div>
                         <!-- End Hero Slider -->
                     </div>
@@ -252,7 +259,7 @@
     <!-- End Call Action Area --> --}}
 
     <!-- Start Banner Area -->
-    <section class="banner section">
+    <!-- <section class="banner section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
@@ -281,7 +288,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- End Banner Area -->
 
     <!-- Start Shipping Info -->
@@ -295,7 +302,7 @@
                     </div>
                     <div class="media-body">
                         <h5>Free Shipping</h5>
-                        <span>On order over $99</span>
+                        <span>On order over 1000 Dinar</span>
                     </div>
                 </li>
                 <!-- Money Return -->

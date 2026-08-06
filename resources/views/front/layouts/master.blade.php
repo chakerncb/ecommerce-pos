@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{URL::asset('assets/css/main.css')}}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" >
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
      @livewireStyles
 
 </head>
@@ -70,18 +70,17 @@
     <!-- Start Header Area --> 
     <header class="header navbar-area">
                 <!-- Start Header Middle -->
-                <div class="header-middle">
+                <div class="header-middle sticky-top fixed-top">
                     <div class="container">
-                        <div class="row align-items-center" style="border-bottom: 1px solid #ebebeb;">
-                            <div class="col-lg-3 col-md-3 col-7">
+                        <div class="row align-items-center" style="border-bottom: 1px solid #ebebeb; justify-content: space-between; border-bottom: none !important">
+                            <a href="{{route('index')}}" class="col-lg-2 col-md-1 col-7">
                                 <!-- Start Header Logo -->
-                                <a class="navbar-brand" href="index.html">
-                                    <img src="{{URL::asset('assets/images/logo/' . $store->logo_dark)}}" alt="Logo">
-                                </a>
+                                    <img style="width: 200px; max-width: 200px; height: auto;"
+                                     src="{{URL::asset('/storage/' . ($store['site_logo']->payload ?? 'logo.png'))}}" alt="Logo">
                                 <!-- End Header Logo -->
-                            </div>
+                            </a>
 
-                            <div class="desktop-searchBar col-lg-5 col-md-7 ">
+                            <div class="desktop-searchBar col-lg-5 col-md-4 ">
                             @livewire('SearchBar')   
                             </div>                         
 
@@ -90,17 +89,17 @@
                                     <div class="nav-hotline">
                                         <i class="lni lni-phone"></i>
                                         <h3>Hotline:
-                                            <span>{{$store->phone}}</span>
+                                            <span>{{ $store['site_phone']->payload ?? '' }}</span>
                                         </h3>
                                     </div>
                                     <div class="navbar-cart">
 
-                                     {{--   <div class="wishlist">
+                                     <!-- <div class="wishlist">
                                             <a href="javascript:void(0)">
                                                 <i class="lni lni-heart"></i>
                                                 <span class="total-items">0</span>
                                             </a> 
-                                        </div>--}}
+                                        </div> -->
 
 
                                         
@@ -111,33 +110,17 @@
                                         </div>
 
                                         <div class="m-2">
-                                                {{-- <div class="dropdown show">
-                                                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="lni lni-user"></i>
-                                                    </a>
-                                                  
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <a class="accout-item">{{ Auth::user()->name }}</a>
-                                                        <hr>
-                                                        <a class="accout-item" href="{{ route('logout') }}"
-                                                        onclick="event.preventDefault();
-                                                                      document.getElementById('logout-form').submit();">
-                                                         {{ __('Logout') }}
-                                                         </a>
-                 
-                                                    
-                                                    </div>
-                                                  </div> --}}
+                                               
 
-                                            <div class="account-dropdown">
+                                            <!-- <div class="account-dropdown">
                                                 <div>
                                                     <button class="account-icon">
                                                         <i class="lni lni-user"></i>
                                                       </button>
                                                 </div>
-                                          <div class="account-dropdown-content">
+                                          <div class="account-dropdown-content"> -->
 
-                                            @guest
+                                            <!-- @guest
 
                                             <div class="account-items">
                                                 
@@ -173,10 +156,8 @@
                                                 <a class="account-item" href="{{route('wishlist.index')}}"><p><b><i class="bi bi-heart"></i>  wishlist</b></p></a>
                                                 <a class="account-item" href="#"><p><b><i class="bi bi-credit-card"></i>  cards</b></p></a>
                                                 <a class="account-item" href="#"><p><b><i class="bi bi-gear-wide-connected"></i>  setting</b></p></a>
-                                                <a class="account-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" ><p><b><i class="bi bi-box-arrow-right"></i> {{ __('Logout') }}</b></p></a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                    @csrf
-                                                </form>
+
+                                                
                                             </div>
                                             <div class="account-get-app">
                                               <p><b>Get the app:</b></p>
@@ -188,7 +169,7 @@
                                           </div>
                                         
                                         </div>
-                                        @endguest
+                                        @endguest -->
                                         </div> 
 
                                         
@@ -218,7 +199,6 @@
                         <div class="col-lg-3 col-md-4 col-12">
                             <div class="footer-logo">
                                 <a href="{{route('index')}}">
-                                    <img src="{{URL::asset('assets/images/logo/'.$store->logo_light)}}" alt="logo">
                                 </a>
                             </div>
                         </div>
@@ -244,27 +224,29 @@
         </div>
         <!-- End Footer Top -->
         <!-- Start Footer Middle -->
+<!--        
         <div class="footer-middle">
             <div class="container">
                 <div class="bottom-inner">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-12">
-                            <!-- Single Widget -->
                             <div class="single-footer f-contact">
                                 <h3>Get In Touch With Us</h3>
-                                <p class="phone">Phone: +213 {{$store->phone}}</p>
+                                @if(!empty($store['site_phone']->payload ?? null))
+                                    <p class="phone">Phone: {{ $store['site_phone']->payload }}</p>
+                                @endif
                                 <ul>
                                     <li><span>Monday-Friday: </span> 9.00 am - 8.00 pm</li>
                                     <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
                                 </ul>
-                                <p class="mail">
-                                    <a href="mailto:{{$store->email}}">{{$store->email}}</a>
-                                </p>
+                                @if(!empty($store['site_email']->payload ?? null))
+                                    <p class="mail">
+                                        <a href="mailto:{{ $store['site_email']->payload }}">{{ $store['site_email']->payload }}</a>
+                                    </p>
+                                @endif
                             </div>
-                            <!-- End Single Widget -->
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <!-- Single Widget -->
                             <div class="single-footer our-app">
                                 <h3>Our Mobile App</h3>
                                 <ul class="app-btn">
@@ -284,10 +266,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <!-- End Single Widget -->
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <!-- Single Widget -->
                             <div class="single-footer f-link">
                                 <h3>Information</h3>
                                 <ul>
@@ -298,10 +278,8 @@
                                     <li><a href="javascript:void(0)">FAQs Page</a></li>
                                 </ul>
                             </div>
-                            <!-- End Single Widget -->
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
-                            <!-- Single Widget -->
                             <div class="single-footer f-link">
                                 <h3>Shop Departments</h3>
                                 <ul>
@@ -312,12 +290,12 @@
                                     <li><a href="javascript:void(0)">Headphones</a></li>
                                 </ul>
                             </div>
-                            <!-- End Single Widget -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+       </div> -->
+
         <!-- End Footer Middle -->
         <!-- Start Footer Bottom -->
         <div class="footer-bottom">
@@ -368,7 +346,7 @@
     <script src="{{URL::asset('assets/js/main.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <x-livewire-alert::scripts />

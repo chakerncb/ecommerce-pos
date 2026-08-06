@@ -57,11 +57,11 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make(),
                 \TomatoPHP\FilamentEcommerce\FilamentEcommercePlugin::make()
-                    ->useCoupon()
-                    ->useGiftCard()
-                    ->useReferralCode()
-                    ->allowOrderExport()
-                    ->allowOrderImport()
+                    // ->useCoupon()
+                    // ->useGiftCard()
+                    // ->useReferralCode()
+                    // ->allowOrderExport()
+                    // ->allowOrderImport()
                     ->useWidgets(),
                 \TomatoPHP\FilamentPos\FilamentPOSPlugin::make(),
             ]);

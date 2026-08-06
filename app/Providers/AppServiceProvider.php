@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\View;
+use App\Models\Product;
+use App\Models\Setting;
+use TomatoPHP\FilamentEcommerce\Models\Product as TomatoProduct;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Relation::morphMap([
+            TomatoProduct::class => Product::class,
+        ]);
+
+        View::composer('front.*', function ($view) {
+            $store = Setting::where('group', 'sites')->get()->keyBy('name');
+            $view->with('store', $store);
+        });
     }
 }
+

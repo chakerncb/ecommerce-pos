@@ -64,14 +64,7 @@
                     <div class="col-lg-3 col-md-6 col-12">
                         <div class="single-product">
                             <div class="product-image">
-                                @if ($product->images->isNotEmpty())
-                                    @foreach ($product->images as $image)
-                                        <img src="{{URL::asset('assets/src/images/product/'.$image->path)}}" alt="Product" />
-                                        @break
-                                    @endforeach
-                                @else
-                                    <img src="{{URL::asset('assets/src/images/product/no-image.png')}}" alt="Default Product" />
-                                @endif
+                                <img src="{{ $product->feature_image }}" alt="{{ $product->name }}" />
                                 <div class="button">
                                     <button wire:click="ToCart({{$product->product_id}})" class="btn"><i class="lni lni-cart"></i> Add To Cart</button>
                                 </div>

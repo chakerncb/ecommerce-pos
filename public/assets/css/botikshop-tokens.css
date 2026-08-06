@@ -14,8 +14,8 @@
   --bk-bg:           #F7F4EF;   /* Warm oat-white background */
   --bk-surface:      #FFFFFF;   /* Cards and modal surface background */
   --bk-ink:          #26211A;   /* Warm dark charcoal text */
-  --bk-accent:       #C84B2F;   /* Brand Rust-Red primary */
-  --bk-accent-hover: #A33520;   /* Deeper rust for hover/active */
+  --bk-accent:       #fe8517;   /* Brand Rust-Red primary */
+  --bk-accent-hover: #e0710d;   /* Deeper rust for hover/active */
   --bk-promo:        #B5882A;   /* Muted warm amber for sale/promo badges */
   --bk-grey-1:       #E0DAD2;   /* Warm light grey for borders/dividers */
   --bk-grey-2:       #8C8278;   /* Warm mid-grey for secondary/muted text */
@@ -55,8 +55,8 @@
   --duration-slow: 300ms;
 
   /* Override Bootstrap 5 CSS custom properties */
-  --bs-primary:          #C84B2F;
-  --bs-primary-rgb:      200, 75, 47;
+  --bs-primary:          #fe8517;
+  --bs-primary-rgb:      254, 133, 23;
   --bs-body-font-family: 'Cairo', sans-serif;
   --bs-body-font-size:   16px;
   --bs-body-color:       #26211A;

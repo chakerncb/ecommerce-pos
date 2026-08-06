@@ -29,7 +29,16 @@
                     @foreach ($products as $result)
                         <a href="{{route('product.details', $result->name)}}" style="color: black;">
                             <div class="list border-bottom">
-                                <img src="{{ URL::asset('assets/src/images/product/' . $result->images->first()->path) }}" alt="Product" />
+                                @if ($result->images && $result->images->isNotEmpty())
+                                    @php $firstImg = $result->images->first(); @endphp
+                                    @if (isset($firstImg->is_url) && $firstImg->is_url)
+                                        <img src="{{ $firstImg->path }}" alt="Product" />
+                                    @else
+                                        <img src="{{ URL::asset('assets/src/images/product/' . $firstImg->path) }}" alt="Product" />
+                                    @endif
+                                @else
+                                    <img src="{{ URL::asset('assets/src/images/product/no-image.png') }}" alt="Product" />
+                                @endif
                                 <div class="d-flex flex-column ml-3">
                                   <span>{{ $result->name }}</span> 
                                   <a href=""><small>{{ $result->category_name }}</small></a>

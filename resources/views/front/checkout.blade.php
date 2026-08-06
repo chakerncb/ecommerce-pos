@@ -362,6 +362,14 @@
 <script>
   $(document).on('click', '#Procced', function(e){
       e.preventDefault();
+
+      // Clear previous errors
+      $('.is-invalid').removeClass('is-invalid');
+      $('.invalid-feedback').remove();
+
+      var $btn = $(this);
+      $btn.prop('disabled', true).html('<i class="mdi mdi-loading mdi-spin me-1"></i> Placing order...');
+
       var formData = new FormData($('#checkout_form')[0]);
 
       $.ajax({
@@ -372,24 +380,39 @@
           contentType: false,
           cache: false,
           success: function (response) {
-              if(response.url) {
-                  window.location.href = response.url;
-              } else {
-                  alert(response.message);
-              }
+              $btn.html('<i class="mdi mdi-check me-1"></i> Order Placed!').removeClass('btn-success').addClass('btn-secondary');
+              // Show a brief success banner then redirect
+              var banner = $('<div class="success alert-message" style="position:fixed;top:20px;right:20px;z-index:9999;background:#d4edda;color:#155724;padding:16px 24px;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.15)">' +
+                  '<strong>&#10003; ' + response.message + '</strong>' +
+                  '</div>');
+              $('body').append(banner);
+              setTimeout(function(){
+                  window.location.href = response.url ? response.url : '/';
+              }, 1800);
           },
           error: function (error) {
+              $btn.prop('disabled', false).html('<i class="mdi mdi-cart-outline me-1"></i> Procced');
               if (error.status === 422) {
                   var errors = error.responseJSON.errors;
-                  $('.is-invalid').removeClass('is-invalid');
-                  $('.invalid-feedback').remove();
                   $.each(errors, function (key, value) {
                       var input = $('[name=' + key + ']');
                       input.addClass('is-invalid');
-                      input.after('<div class="invalid-feedback">' + value[0] + '</div>');
+                      input.closest('.mb-3').append('<div class="invalid-feedback d-block">' + value[0] + '</div>');
                   });
+                  // Scroll to first error
+                  var firstErr = $('.is-invalid').first();
+                  if (firstErr.length) {
+                      $('html,body').animate({ scrollTop: firstErr.offset().top - 120 }, 400);
+                  }
               } else {
-                  alert('An error occurred. Please try again.');
+                  var msg = (error.responseJSON && error.responseJSON.message)
+                      ? error.responseJSON.message
+                      : 'An error occurred. Please try again.';
+                  var errBanner = $('<div class="danger alert-message" style="position:fixed;top:20px;right:20px;z-index:9999;background:#f8d7da;color:#842029;padding:16px 24px;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.15)">' +
+                      '<strong>&#9888; ' + msg + '</strong>' +
+                      '</div>');
+                  $('body').append(errBanner);
+                  setTimeout(function(){ errBanner.fadeOut(400, function(){ $(this).remove(); }); }, 5000);
               }
           }
       });

@@ -37,20 +37,46 @@ class Product extends TomatoProduct
     }
 
     /**
+     * Accessor for Feature Image URL
+     */
+    public function getFeatureImageUrlAttribute()
+    {
+        $media = $this->getMedia('feature_image')->first();
+        if ($media) {
+            return $media->getUrl();
+        }
+
+        $imagesMedia = $this->getMedia('images')->first();
+        if ($imagesMedia) {
+            return $imagesMedia->getUrl();
+        }
+
+        return asset('assets/src/images/product/no-image.png');
+    }
+
+    /**
+     * Accessor for feature_image
+     */
+    public function getFeatureImageAttribute()
+    {
+        return $this->feature_image_url;
+    }
+
+    /**
      * Accessor for legacy images relation compatibility
      */
     public function getImagesAttribute()
     {
-        $media = $this->getMedia('feature_image');
-        if ($media->isEmpty()) {
-            $media = $this->getMedia('images');
-        }
+        $featureMedia = $this->getMedia('feature_image');
+        $galleryMedia = $this->getMedia('images');
 
-        if ($media->isEmpty()) {
+        $allMedia = $featureMedia->concat($galleryMedia);
+
+        if ($allMedia->isEmpty()) {
             return collect();
         }
 
-        return $media->map(function ($item) {
+        return $allMedia->map(function ($item) {
             return (object)[
                 'path' => $item->getUrl(),
                 'is_url' => true,
@@ -64,19 +90,20 @@ class Product extends TomatoProduct
     public function getNameAttribute($value)
     {
         if (is_array($value)) {
-            return $value[app()->getLocale()] ?? reset($value) ?? '';
+            $locale = app()->getLocale();
+            return $value[$locale] ?? reset($value) ?? '';
         }
-        if (method_exists($this, 'getTranslation')) {
-            try {
-                $translated = $this->getTranslation('name', app()->getLocale(), false);
-                if (!empty($translated)) {
-                    return $translated;
-                }
-            } catch (\Throwable $e) {
-                // fallback
+
+        if (is_string($value) && !empty($value)) {
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                $locale = app()->getLocale();
+                return $decoded[$locale] ?? reset($decoded) ?? $value;
             }
+            return $value;
         }
-        return is_string($value) ? $value : '';
+
+        return '';
     }
 
     /**

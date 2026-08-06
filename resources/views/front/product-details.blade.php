@@ -33,15 +33,23 @@
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
-                                    @foreach ($product->images as $image)   
-                                    <img src="{{URL::asset('assets/src/images/product/'.$image->path)}}" alt="Product" onclick="openModal('{{URL::asset('assets/src/images/product/'.$image->path)}}')" />
-                                    @break
-                                    @endforeach
+                                    @if ($product->images && $product->images->isNotEmpty())
+                                        @foreach ($product->images as $image)   
+                                            @php $imgSrc = (isset($image->is_url) && $image->is_url) ? $image->path : URL::asset('assets/src/images/product/'.$image->path); @endphp
+                                            <img src="{{ $imgSrc }}" alt="Product" onclick="openModal('{{ $imgSrc }}')" />
+                                            @break
+                                        @endforeach
+                                    @else
+                                        <img src="{{ URL::asset('assets/src/images/product/no-image.png') }}" alt="Product" />
+                                    @endif
                                 </div>
                                 <div class="images">
-                                    @foreach ($product->images as $image)   
-                                    <img id="small-img" src="{{URL::asset('assets/src/images/product/'.$image->path)}}" alt="Product" onclick="openModal('{{URL::asset('assets/src/images/product/'.$image->path)}}')" />
-                                    @endforeach
+                                    @if ($product->images && $product->images->isNotEmpty())
+                                        @foreach ($product->images as $image)   
+                                            @php $imgSrc = (isset($image->is_url) && $image->is_url) ? $image->path : URL::asset('assets/src/images/product/'.$image->path); @endphp
+                                            <img id="small-img" src="{{ $imgSrc }}" alt="Product" onclick="openModal('{{ $imgSrc }}')" />
+                                        @endforeach
+                                    @endif
                                 </div>
                             </main>
                         </div>
@@ -83,7 +91,7 @@
                                         <p style="font-size: 24px;">{{$product->stock}}</p>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12">
+                                <!-- <div class="col-lg-4 col-md-4 col-12">
                                     <div class="form-group">
                                         <label for="color">Battery capacity</label>
                                         <select class="form-control" id="color">
@@ -92,7 +100,7 @@
                                             <option>8000 mAh</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="bottom-content">
                                 @livewire('product-details-card', ['product' => $product])
@@ -122,7 +130,7 @@
                             <div class="info-body">
                                 <h4>Specifications</h4>
                                 <ul class="normal-list">
-                                    @foreach ($product->features as $feature)
+                                    @foreach ($product->features ?? [] as $feature)
                                     <li><span>{{$feature->name}}:</span> {{$feature->description}}</li>
                                     @endforeach
                                     

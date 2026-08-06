@@ -2,13 +2,12 @@
 
 namespace App\Traits;
 
-use App\Models\Store;
+use App\Models\Setting;
 
-Trait StoreInfoTrait {
+trait StoreInfoTrait {
 
-      public function getStoreInfo()
-      {
-         $store = Store::all()->first();
-         return $store;
-      }
+    public static function getStoreInfo()
+    {
+        return Setting::where('group', 'sites')->get()->keyBy('name');
+    }
 }

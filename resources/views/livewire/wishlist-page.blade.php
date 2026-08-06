@@ -4,7 +4,7 @@
                 <div class="title">
                     <div class="row">
                         <div class="col"><h4><b>My Wishlist</b></h4></div>
-                        <div class="col text-right"><a wire:click="clearWishlist" style="color: #0167F3;"><u>Clear All</u></a></div>
+                        <div class="col text-right"><a wire:click="clearWishlist" style="color: #fe8517;"><u>Clear All</u></a></div>
                     </div>
                 </div>    
                 @foreach ($products as $item )

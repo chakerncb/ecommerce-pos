@@ -21,7 +21,7 @@ Route::group([
         return Route::post('/livewire/update', $handle);
     });
 
-    Auth::routes();
+    // Auth::routes();
 
     Route::get('/', [HomeController::class, 'index'])->name('index');
 

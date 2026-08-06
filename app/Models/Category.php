@@ -22,18 +22,19 @@ class Category extends TomatoCategory
     public function getNameAttribute($value)
     {
         if (is_array($value)) {
-            return $value[app()->getLocale()] ?? reset($value) ?? '';
+            $locale = app()->getLocale();
+            return $value[$locale] ?? reset($value) ?? '';
         }
-        if (method_exists($this, 'getTranslation')) {
-            try {
-                $translated = $this->getTranslation('name', app()->getLocale(), false);
-                if (!empty($translated)) {
-                    return $translated;
-                }
-            } catch (\Throwable $e) {
-                // fallback
+
+        if (is_string($value) && !empty($value)) {
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                $locale = app()->getLocale();
+                return $decoded[$locale] ?? reset($decoded) ?? $value;
             }
+            return $value;
         }
-        return is_string($value) ? $value : '';
+
+        return '';
     }
 }

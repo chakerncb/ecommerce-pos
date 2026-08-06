@@ -4,7 +4,7 @@
             <div class="title">
                 <div class="row">
                     <div class="col"><h4><b>Shopping Cart</b></h4></div>
-                    <div class="col text-right"><a wire:click="clearCart" style="color: #0167F3;"><u>Clear All</u></a></div>
+                    <div class="col text-right"><a wire:click="clearCart" style="color: #fe8517;"><u>Clear All</u></a></div>
                 </div>
             </div>    
             @if ($cartCount == 0)

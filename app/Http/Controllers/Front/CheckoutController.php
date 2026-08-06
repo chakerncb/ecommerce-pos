@@ -2,33 +2,30 @@
 
 namespace App\Http\Controllers\Front;
 
-use App;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
-use App\Models\Order;
+use App\Models\Account;
 use App\Models\Product;
-use App\Traits\InvoiceTrait;
-use Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-
+use Illuminate\Support\Str;
+use TomatoPHP\FilamentEcommerce\Models\Order;
+use TomatoPHP\FilamentEcommerce\Models\OrdersItem;
+use TomatoPHP\FilamentEcommerce\Models\Branch;
 
 class CheckoutController extends Controller
 {
-    use InvoiceTrait;
-    //
+    // ─── Show Checkout Page ───────────────────────────────────────
     public function index()
     {
         $cartItems = Cart::content();
-        
-        $Cart = new \stdClass();
-        $Cart->total = Cart::total();
-        $Cart->count = Cart::count();
-        $Cart->subtotal = Cart::subtotal();
-        $Cart->tax = Cart::tax();
-        $Cart->discount = 0;
 
+        $Cart            = new \stdClass();
+        $Cart->total     = Cart::total();
+        $Cart->count     = Cart::count();
+        $Cart->subtotal  = Cart::subtotal();
+        $Cart->tax       = Cart::tax();
+        $Cart->discount  = 0;
 
         if ($cartItems->count() == 0) {
             return redirect()->route('cart.store')->with('error', 'Your cart is empty');
@@ -38,116 +35,119 @@ class CheckoutController extends Controller
             $user = auth()->user();
             return view('front.checkout', compact('Cart', 'cartItems', 'user'));
         }
-    
 
-        return view('front.checkout', compact('Cart','cartItems'));
+        return view('front.checkout', compact('Cart', 'cartItems'));
     }
 
-    public function store(OrderRequest $request){
+    // ─── Place Order ─────────────────────────────────────────────
+    public function store(OrderRequest $request)
+    {
+        // Resolve the guest/walk-in account used for online orders
+        $account = Account::firstOrCreate(
+            ['username' => 'online-guest'],
+            [
+                'name'      => 'Online Guest',
+                'type'      => 'account',
+                'is_active' => true,
+                'loginBy'   => 'email',
+            ]
+        );
 
-        if(auth()->check()){
+        // Use the first (or only) branch
+        $branch = Branch::first();
+        if (! $branch) {
+            return response()->json([
+                'message' => 'No branch configured. Please create a branch in the admin panel first.',
+            ], 500);
+        }
 
-            // $address = auth()->user()->addresses()->create([
-            //     'address' => $request->shipping_address,
-            //     'city' => $request->shipping_city,
-            //     'phone' => $request->shipping_phone,
-            //     'fullname' => $request->shipping_fullname,
-            // ]);
+        // Parse the total (remove commas injected by the cart package)
+        $total = (float) str_replace(',', '', Cart::total());
 
-            $order = Order::create([
-            'costumer_id' => auth()->user()->id,
-            'total' => str_replace(',', '', Cart::total()),
-            'status' => 'pending',
+        // Build the flat address note
+        $addressNote = implode(', ', array_filter([
+            $request->address,
+            $request->municipality,
+            $request->wilaya,
+        ]));
+
+        // Create the order in the Filament/POS orders table
+        $order = Order::create([
+            'uuid'           => Str::uuid(),
+            'account_id'     => $account->id,
+            'branch_id'      => $branch->id,
+            'name'           => $request->name,
+            'phone'          => $request->phone,
+            'address'        => $addressNote,
+            'source'         => 'website',
+            'type'           => 'delivery',
+            'total'          => $total,
+            'discount'       => 0,
+            'shipping'       => 0,
+            'vat'            => 0,
+            'status'         => 'pending',
+            'is_approved'    => false,
+            'is_closed'      => false,
+            'is_payed'       => false,
             'payment_method' => $request->pay_method,
-            'payment_status' => 'pending',
-            'shipping_fullname' => $request->name,
-            'shipping_method' => $request->chip_method,
-            'shipping_address' => $request->address,
-            'shipping_city' => $request->wilaya,
-            'shipping_municipality' => $request->municipality,
-            'shipping_phone' => $request->phone,
-            'shipping_email' => $request->email,
-            'shipping_status' => 'pending',
+            'notes'          => 'Shipping: ' . $request->chip_method
+                                . ($request->email ? ' | Email: ' . $request->email : ''),
         ]);
 
+        // Save each cart line as an orders_item
+        foreach (Cart::content() as $item) {
+            OrdersItem::create([
+                'order_id'   => $order->id,
+                'account_id' => $account->id,
+                'product_id' => $item->id,
+                'item'       => $item->name,
+                'price'      => (float) $item->price,
+                'discount'   => 0,
+                'vat'        => 0,
+                'total'      => (float) $item->subtotal,
+                'qty'        => $item->qty,
+            ]);
+        }
+
+        // Decrease product stock
         $this->decreaseStock();
 
+        // Clear cart
+        Cart::destroy();
+
         return response()->json([
-            'message' => 'Order has been placed successfully',
-            'url' => '/invoice/'.$order->ord_id,	
+            'message' => 'Order placed successfully!',
+            'url'     => route('index'),
+            'order_id'=> $order->id,
         ]);
+    }
 
-
-        }
-
-        else {
-            $order = Order::create([
-                'costumer_id' => 0,
-                'total' => str_replace(',', '', Cart::total()),
-                'status' => 'pending',
-                'payment_method' => $request->pay_method,
-                'payment_status' => 'pending',
-                'shipping_fullname' => $request->name,
-                'shipping_method' => $request->chip_method,
-                'shipping_address' => $request->address,
-                'shipping_city' => $request->wilaya,
-                'shipping_municipality' => $request->municipality,
-                'shipping_phone' => $request->phone,
-                'shipping_email' => $request->email,
-                'shipping_status' => 'pending',
-            ]);
-
-            if(!$order){
-                return response()->json([
-                    'message' => 'Order has not been placed',
-                ]);
-            }
-
-            $this->decreaseStock();
-
-            return response()->json([
-                'message' => 'Order has been placed successfully',
-                'url' => '/invoice/'.$order->ord_id,
-            ]);
-
-
-        }
-   }
-
-    private function decreaseStock() {
-        $cartItems = Cart::content();
-        foreach ($cartItems as $item) {
+    // ─── Decrease Stock After Order ───────────────────────────────
+    private function decreaseStock(): void
+    {
+        foreach (Cart::content() as $item) {
             $product = Product::find($item->id);
-            if ($product) {
-                $product->stock -= $item->qty;
-                $product->save();
+            if ($product && isset($product->attributes['stock'])) {
+                // Only decrease if the column exists on this model
+                try {
+                    \Illuminate\Support\Facades\DB::table('products')
+                        ->where('id', $item->id)
+                        ->decrement('stock', $item->qty);
+                } catch (\Exception $e) {
+                    // stock column may not exist — silently skip
+                }
             }
         }
     }
 
-    public function invoice($ord_id){
-
-        $order = Order::find($ord_id);
-        if(!$order){
+    // ─── Legacy Invoice Route (kept for backward-compat) ─────────
+    public function invoice($id)
+    {
+        $order = Order::find($id);
+        if (! $order) {
             return redirect()->route('checkout.index')->with('error', 'Order not found');
         }
 
-       $invoice = $this->newInvoice($order);
-
-       if($invoice == false){
-           return redirect()->route('checkout.index')->with('error', 'Invoice not generated');
-       }
-
-       $invoiceTable = \App\Models\Invoice::create([
-           'inv_order_id' => $order->ord_id,
-           'inv_costumer_id' => $order->costumer_id,
-            'inv_path' => 'invoice_'.$invoice->getSerialNumber().'.pdf',
-         ]);
-
-        $invoice->save('invoices');
-
-        Cart::destroy();
-                  
-        return redirect()->route('index')->with('success', 'Order has been created successfully');
+        return redirect()->route('index')->with('success', 'Order #' . $order->id . ' confirmed. Thank you!');
     }
 }

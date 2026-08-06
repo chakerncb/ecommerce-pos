@@ -9,9 +9,9 @@
             <button wire:click="ToCart({{$product->product_id}})" class="btn" style="width: 100%;">Add to Cart</button>
         </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-12">
+    <!-- <div class="col-lg-4 col-md-4 col-12">
         <div class="button cart-button">
             <button wire:click="ToWishlist({{$product->product_id}})" class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
         </div>
-    </div>
+    </div> -->
 </div>

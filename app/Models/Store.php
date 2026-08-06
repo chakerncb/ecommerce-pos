@@ -19,6 +19,8 @@ class Store extends Model
                     'address' => 'Store Address',
                     'phone' => '123456789',
                     'email' => 'store@example.com',
+                    'logo_dark' => 'logo.png',
+                    'logo_light' => 'logo.png',
                 ]
             ]);
         }
