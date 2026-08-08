@@ -39,7 +39,7 @@
                 <span></span>
                 <span></span>
             </div> --}}
-            <img style="width: 100%;" src="{{URL::asset('assets/images/logo/preloader.gif')}}" alt="">
+            <img style="width: 100%;" src="{{URL::asset('/storage/' . ($store['site_logo']->payload ?? 'assets/images/logo/preloader.gif'))}}" alt="">
         </div>
     </div>
     <!-- /End Preloader -->
