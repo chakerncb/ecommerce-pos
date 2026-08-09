@@ -180,7 +180,7 @@
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div data-bs-toggle="collapse">
                                                         <label class="card-radio-label">
-                                                            <input type="radio" name="pay_method" value="card" class="card-radio-input">
+                                                            <input type="radio" name="pay_method" value="card" class="card-radio-input" disabled>
                                                             <span class="card-radio py-3 text-center text-truncate">
                                                                 <i class="bx bx-credit-card d-block h2 mb-3"></i>
                                                                 Credit / Debit Card
@@ -194,7 +194,7 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-lg-3 col-sm-6">
+                                                <!-- <div class="col-lg-3 col-sm-6">
                                                     <div>
                                                         <label class="card-radio-label">
                                                             <input type="radio" name="pay_method" value="paypal" class="card-radio-input">
@@ -209,7 +209,7 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                </div>
+                                                </div> -->
         
                                                 <div class="col-lg-3 col-sm-6">
                                                     <div>

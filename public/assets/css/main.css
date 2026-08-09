@@ -3058,12 +3058,126 @@ top: -1px;
     display: block;
   }
 
+  .header .header-middle {
+    display: block;
+    padding: 12px 0 14px;
+  }
+
+  .header .header-middle > .container > .row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header .header-middle > .container > .row > a,
+  .header .header-middle > .container > .row > .desktop-searchBar,
+  .header .header-middle > .container > .row > .mobile-header-actions {
+    width: 100%;
+    max-width: 100%;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+  }
+
+  .header .header-middle > .container > .row > a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-bottom: 2px;
+  }
+
+  .header .header-middle > .container > .row > a img {
+    width: 170px;
+    max-width: 170px;
+  }
+
+  .header .header-middle > .container > .row > .mobile-header-actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    gap: 10px;
+  }
+
+  .header .mobile-header-actions .mobile-searchBar {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .header .mobile-header-actions .middle-right-area {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    float: none;
+    margin-top: 2px;
+  }
+
+  .header .mobile-header-actions .nav-hotline {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-right: 0;
+    padding-left: 0;
+    gap: 8px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+
+  .header .mobile-header-actions .nav-hotline i {
+    position: static;
+    -webkit-transform: none;
+    transform: none;
+    margin-right: 0;
+  }
+
+  .header .mobile-header-actions .nav-hotline h3 {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .header .mobile-header-actions .nav-hotline h3 span {
+    font-size: 12px;
+    margin-top: 1px;
+  }
+
+  .header .mobile-header-actions .navbar-cart {
+    width: auto;
+    margin-left: auto;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+
   .desktop-searchBar {
     display: none;
   }
 
   .mobile-searchBar {
     display: block;
+    width: 100%;
   }
 
   .social-container {
@@ -3988,7 +4102,7 @@ top: 2px;
      End Header CSS
   ========================================*/
 /*======================================
-    Hero Area CSS
+     Area CSS
 ========================================*/
 .hero-area {
   position: relative;
@@ -4074,7 +4188,7 @@ top: 2px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 600px;
+  height: 650px;
   position: relative;
 }
 

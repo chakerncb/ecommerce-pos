@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>BotikShop</title>
+    <title>{{ $store['site_name']->payload ?? 'ChakerShop' }}</title>
     {{-- <link rel="icon" href="{{URL::asset('assets/images/logo/icon-2.png')}}"> --}}
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -80,11 +80,14 @@
                                 <!-- End Header Logo -->
                             </a>
 
-                            <div class="desktop-searchBar col-lg-5 col-md-4 ">
+                            <div class=" col-lg-5 col-md-4 ">
                             @livewire('SearchBar')   
                             </div>                         
 
-                            <div class="col-lg-4 col-md-2 col-5">
+                            <div class="col-lg-4 col-md-2 col-5 mobile-header-actions">
+                                {{-- <div class="mobile-searchBar ">
+                                    @livewire('SearchBar')
+                                </div> --}}
                                 <div class="middle-right-area">
                                     <div class="nav-hotline">
                                         <i class="lni lni-phone"></i>
@@ -180,9 +183,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mobile-searchBar ">
-                        @livewire('SearchBar')                            
                     </div>
                 </div>
                 <!-- End Header Middle -->

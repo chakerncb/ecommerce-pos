@@ -140,45 +140,39 @@
                     <div class="slider-head">
                         <!-- Start Hero Slider -->
                         <div class="hero-slider">
-                            @if(isset($trendingProducts) && count($trendingProducts) > 0)
-                                @foreach ($trendingProducts as $product)
-                                    @php
-                                        $imgPath = $product->feature_image ?: asset('assets/images/hero/slider-bg1.jpg');
-                                    @endphp
-                                    <!-- Start Single Slider -->
-                                    <div class="single-slider"
-                                        style="background-image: URL('{{ $imgPath }}');">
-                                        <div class="content">
-                                            <h2><span>Trending Now</span>
-                                                {{ $product->name }}
-                                            </h2>
-                                            <p>{{ Str::limit(strip_tags($product->about ?? $product->description ?? 'Check out our top trending product with best deals.'), 120) }}</p>
-                                            <h3><span>Now Only</span> {{ number_format($product->price, 2) }} DA</h3>
-                                            <div class="button">
-                                                <a href="{{ route('product.details', $product->name) }}" class="btn">Shop Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Single Slider -->
-                                @endforeach
-                            @else
-                                <!-- Start Single Slider Fallback -->
+                                <!-- Start Banner Slide (always first) -->
                                 <div class="single-slider"
-                                    style="background-image: URL({{URL::asset('assets/images/hero/slider-bg1.jpg')}});">
+                                    style="background-image: URL('{{ URL::asset('assets/banner.png') }}'); background-size: contain; ">
                                     <div class="content">
-                                        <h2><span>No restocking fee ($35 savings)</span>
-                                            M75 Sport Watch
-                                        </h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua.</p>
-                                        <h3><span>Now Only</span> $320.99</h3>
                                         <div class="button">
                                             <a href="{{ route('shop.index') }}" class="btn">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Single Slider Fallback -->
-                            @endif
+                                <!-- End Banner Slide -->
+
+                                @if(isset($trendingProducts) && count($trendingProducts) > 0)
+                                    @foreach ($trendingProducts as $product)
+                                        @php
+                                            $imgPath = $product->feature_image ?: asset('assets/images/hero/slider-bg1.jpg');
+                                        @endphp
+                                        <!-- Start Single Slider -->
+                                        <div class="single-slider"
+                                            style="background-image: URL('{{ $imgPath }}');">
+                                            <div class="content">
+                                                <h2><span>Trending Now</span>
+                                                    {{ $product->name }}
+                                                </h2>
+                                                <p>{{ Str::limit(strip_tags($product->about ?? $product->description ?? 'Check out our top trending product with best deals.'), 120) }}</p>
+                                                <h3><span>Now Only</span> {{ number_format($product->price, 2) }} DA</h3>
+                                                <div class="button">
+                                                    <a href="{{ route('product.details', $product->name) }}" class="btn">Shop Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Slider -->
+                                    @endforeach
+                                @endif
                         </div>
                         <!-- End Hero Slider -->
                     </div>

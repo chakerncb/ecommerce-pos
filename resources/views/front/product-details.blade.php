@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <div class="product-details-info">
+            <!-- <div class="product-details-info">
                 <div class="single-block">
                     <div class="row">
                         <div class="col-lg-6 col-12">
@@ -147,7 +147,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
     <!-- End Item Details -->
