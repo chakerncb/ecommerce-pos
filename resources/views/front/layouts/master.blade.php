@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{URL::asset('assets/css/tiny-slider.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('assets/css/glightbox.min.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('assets/css/main.css')}}" />
+    <link rel="stylesheet" href="{{URL::asset('assets/css/apple-design.css')}}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" >
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
@@ -353,45 +354,48 @@
     <x-livewire-alert::flash />
     @yield('scripts')
     <script type="text/javascript">
-        //========= Hero Slider 
-        tns({
-            container: '.hero-slider',
-            slideBy: 'page',
-            autoplay: true,
-            autoplayButtonOutput: false,
-            mouseDrag: true,
-            gutter: 0,
-            items: 1,
-            nav: false,
-            controls: true,
-            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-        });
+        //========= Hero Slider (only init if element exists on this page)
+        if (document.querySelector('.hero-slider')) {
+            tns({
+                container: '.hero-slider',
+                slideBy: 'page',
+                autoplay: true,
+                autoplayButtonOutput: false,
+                mouseDrag: true,
+                gutter: 0,
+                items: 1,
+                nav: false,
+                controls: true,
+                controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+            });
+        }
 
-        //======== Brand Slider
-        tns({
-            container: '.brands-logo-carousel',
-            autoplay: true,
-            autoplayButtonOutput: false,
-            mouseDrag: true,
-            gutter: 15,
-            nav: false,
-            controls: false,
-            responsive: {
-                0: {
-                    items: 1,
-                },
-                540: {
-                    items: 3,
-                },
-                768: {
-                    items: 5,
-                },
-                992: {
-                    items: 6,
+        //======== Brand Slider (only init if element exists on this page)
+        if (document.querySelector('.brands-logo-carousel')) {
+            tns({
+                container: '.brands-logo-carousel',
+                autoplay: true,
+                autoplayButtonOutput: false,
+                mouseDrag: true,
+                gutter: 15,
+                nav: false,
+                controls: false,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    540: {
+                        items: 3,
+                    },
+                    768: {
+                        items: 5,
+                    },
+                    992: {
+                        items: 6,
+                    }
                 }
-            }
-        });
-        
+            });
+        }
     </script>
 </body>
 

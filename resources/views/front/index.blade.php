@@ -140,39 +140,98 @@
                     <div class="slider-head">
                         <!-- Start Hero Slider -->
                         <div class="hero-slider">
-                                <!-- Start Banner Slide (always first) -->
-                                <div class="single-slider"
-                                    style="background-image: URL('{{ URL::asset('assets/banner.png') }}'); background-size: contain; ">
-                                    <div class="content">
-                                        <div class="button">
-                                            <a href="{{ route('shop.index') }}" class="btn">Shop Now</a>
-                                        </div>
+
+                            <!-- Start Banner Slide (always first) -->
+                            <div class="single-slider single-slider--banner"
+                                style="background-image: URL('{{ URL::asset('assets/banner.png') }}');">
+                                {{-- SVG wave background decoration --}}
+                                <svg class="hero-svg-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 650" preserveAspectRatio="none" aria-hidden="true">
+                                    <path d="M0,200 C360,320 720,80 1440,250 L1440,650 L0,650 Z" fill="rgba(255,255,255,0.06)"/>
+                                    <path d="M0,350 C400,200 900,450 1440,300 L1440,650 L0,650 Z" fill="rgba(255,255,255,0.04)"/>
+                                </svg>
+                                <div class="content content--banner">
+                                    <div class="button">
+                                        <a href="{{ route('shop.index') }}" class="btn btn-hero">Shop Now</a>
                                     </div>
                                 </div>
-                                <!-- End Banner Slide -->
+                            </div>
+                            <!-- End Banner Slide -->
 
-                                @if(isset($trendingProducts) && count($trendingProducts) > 0)
-                                    @foreach ($trendingProducts as $product)
-                                        @php
-                                            $imgPath = $product->feature_image ?: asset('assets/images/hero/slider-bg1.jpg');
-                                        @endphp
-                                        <!-- Start Single Slider -->
-                                        <div class="single-slider"
-                                            style="background-image: URL('{{ $imgPath }}');">
-                                            <div class="content">
-                                                <h2><span>Trending Now</span>
-                                                    {{ $product->name }}
-                                                </h2>
-                                                <p>{{ Str::limit(strip_tags($product->about ?? $product->description ?? 'Check out our top trending product with best deals.'), 120) }}</p>
-                                                <h3><span>Now Only</span> {{ number_format($product->price, 2) }} DA</h3>
+                            @if(isset($trendingProducts) && count($trendingProducts) > 0)
+                                @foreach ($trendingProducts as $product)
+                                    @php
+                                        $hasImg = !empty($product->feature_image);
+                                        $productName = e($product->name);
+                                        $encodedName = urlencode(substr($product->name, 0, 2));
+                                    @endphp
+                                    <!-- Start Product Slide -->
+                                    <div class="single-slider single-slider--product">
+                                        {{-- SVG wave background decoration --}}
+                                        <svg class="hero-svg-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 650" preserveAspectRatio="none" aria-hidden="true">
+                                            <path d="M0,200 C360,320 720,80 1440,250 L1440,650 L0,650 Z" fill="rgba(6,40,95,0.07)"/>
+                                            <path d="M0,350 C400,200 900,450 1440,300 L1440,650 L0,650 Z" fill="rgba(254,133,23,0.05)"/>
+                                        </svg>
+
+                                        <div class="hero-product-inner">
+                                            {{-- Left: text content --}}
+                                            <div class="hero-product-copy">
+                                                <span class="hero-eyebrow">Trending Now</span>
+                                                <h2 class="hero-title">{{ $product->name }}</h2>
+                                                <p class="hero-desc">{{ Str::limit(strip_tags($product->about ?? $product->description ?? 'Check out our top trending product with best deals.'), 120) }}</p>
+                                                <div class="hero-price">
+                                                    <span class="hero-price__label">Now Only</span>
+                                                    <strong class="hero-price__amount">{{ number_format($product->price, 2) }} <em>DA</em></strong>
+                                                </div>
                                                 <div class="button">
-                                                    <a href="{{ route('product.details', $product->name) }}" class="btn">Shop Now</a>
+                                                    <a href="{{ route('product.details', $product->name) }}" class="btn btn-hero">Shop Now</a>
                                                 </div>
                                             </div>
+
+                                            {{-- Right: product visual --}}
+                                            <div class="hero-product-visual">
+                                                @if($hasImg)
+                                                    <div class="hero-product-img-wrap">
+                                                        <img src="{{ $product->feature_image }}" alt="{{ $product->name }}" class="hero-product-img">
+                                                    </div>
+                                                @else
+                                                    {{-- SVG placeholder that feels designed, not broken --}}
+                                                    <svg class="hero-product-placeholder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340" aria-label="{{ $product->name }} product illustration">
+                                                        <defs>
+                                                            <radialGradient id="bg{{ $loop->index }}" cx="50%" cy="50%" r="50%">
+                                                                <stop offset="0%" stop-color="#fe8517" stop-opacity="0.18"/>
+                                                                <stop offset="100%" stop-color="#06285f" stop-opacity="0.08"/>
+                                                            </radialGradient>
+                                                            <linearGradient id="box{{ $loop->index }}" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                                <stop offset="0%" stop-color="#fe8517"/>
+                                                                <stop offset="100%" stop-color="#e06000"/>
+                                                            </linearGradient>
+                                                        </defs>
+                                                        {{-- soft glow circle --}}
+                                                        <circle cx="170" cy="170" r="150" fill="url(#bg{{ $loop->index }})"/>
+                                                        {{-- abstract product box --}}
+                                                        <rect x="100" y="130" width="140" height="120" rx="12" fill="url(#box{{ $loop->index }})" opacity="0.92"/>
+                                                        <rect x="115" y="115" width="110" height="30" rx="6" fill="#06285f" opacity="0.85"/>
+                                                        {{-- shine --}}
+                                                        <rect x="110" y="140" width="40" height="100" rx="8" fill="white" opacity="0.08"/>
+                                                        {{-- label area --}}
+                                                        <rect x="120" y="175" width="100" height="8" rx="4" fill="white" opacity="0.4"/>
+                                                        <rect x="130" y="192" width="80" height="6" rx="3" fill="white" opacity="0.25"/>
+                                                        {{-- initials --}}
+                                                        <text x="170" y="235" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="700" fill="white" opacity="0.9">{{ strtoupper(substr($product->name, 0, 2)) }}</text>
+                                                        {{-- decorative dots --}}
+                                                        <circle cx="80" cy="90" r="8" fill="#fe8517" opacity="0.3"/>
+                                                        <circle cx="270" cy="260" r="12" fill="#06285f" opacity="0.15"/>
+                                                        <circle cx="60" cy="240" r="5" fill="#fe8517" opacity="0.2"/>
+                                                        <circle cx="290" cy="100" r="6" fill="#06285f" opacity="0.12"/>
+                                                    </svg>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <!-- End Single Slider -->
-                                    @endforeach
-                                @endif
+                                    </div>
+                                    <!-- End Product Slide -->
+                                @endforeach
+                            @endif
+
                         </div>
                         <!-- End Hero Slider -->
                     </div>

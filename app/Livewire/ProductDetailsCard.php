@@ -48,8 +48,19 @@ class ProductDetailsCard extends Component
         }
 
         $this->alert('success', 'Product added to cart');
+    }
 
+    public function BuyNow($product_id)
+    {
+        $added = $this->addToCart($product_id);
 
+        if ($added == false) {
+            $this->alert('error', 'Product not found');
+            return;
+        }
+
+        $this->dispatch('cartUpdated');
+        return redirect()->route('checkout.index');
     }
 
 

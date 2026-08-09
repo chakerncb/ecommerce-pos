@@ -123,44 +123,48 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        //========= Hero Slider 
-        tns({
-            container: '.hero-slider',
-            slideBy: 'page',
-            autoplay: true,
-            autoplayButtonOutput: false,
-            mouseDrag: true,
-            gutter: 0,
-            items: 1,
-            nav: false,
-            controls: true,
-            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-        });
+        //========= Hero Slider (only init if element exists on this page)
+        if (document.querySelector('.hero-slider')) {
+            tns({
+                container: '.hero-slider',
+                slideBy: 'page',
+                autoplay: true,
+                autoplayButtonOutput: false,
+                mouseDrag: true,
+                gutter: 0,
+                items: 1,
+                nav: false,
+                controls: true,
+                controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+            });
+        }
 
-        //======== Brand Slider
-        tns({
-            container: '.brands-logo-carousel',
-            autoplay: true,
-            autoplayButtonOutput: false,
-            mouseDrag: true,
-            gutter: 15,
-            nav: false,
-            controls: false,
-            responsive: {
-                0: {
-                    items: 1,
-                },
-                540: {
-                    items: 3,
-                },
-                768: {
-                    items: 5,
-                },
-                992: {
-                    items: 6,
+        //======== Brand Slider (only init if element exists on this page)
+        if (document.querySelector('.brands-logo-carousel')) {
+            tns({
+                container: '.brands-logo-carousel',
+                autoplay: true,
+                autoplayButtonOutput: false,
+                mouseDrag: true,
+                gutter: 15,
+                nav: false,
+                controls: false,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    540: {
+                        items: 3,
+                    },
+                    768: {
+                        items: 5,
+                    },
+                    992: {
+                        items: 6,
+                    }
                 }
-            }
-        });
+            });
+        }
     </script>
 </body
 </html>

@@ -62,12 +62,13 @@
             
             @foreach ($products as $product)
                     <div class="col-lg-3 col-md-6 col-12">
-                        <div class="single-product">
+                        <div class="single-product product-card-clickable" style="position:relative; cursor:pointer;">
+                            <a href="{{route('product.details', $product->name)}}" class="product-card-overlay-link" aria-label="View {{$product->name}}"></a>
                             <div class="product-image">
                                 <img src="{{ $product->feature_image }}" alt="{{ $product->name }}" />
-                                <div class="button">
-                                    <button wire:click="ToCart({{$product->product_id}})" class="btn"><i class="lni lni-cart"></i> Add To Cart</button>
-                                </div>
+                                <button wire:click.stop="ToCart({{$product->product_id}})" class="btn-atc-icon" title="Add to Cart">
+                                    <i class="bi bi-cart-plus"></i>
+                                </button>
                             </div>
                             <div class="product-info">
                                 <span class="category">{{$product->category_name}}</span>

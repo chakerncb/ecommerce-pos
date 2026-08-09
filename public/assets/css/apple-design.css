@@ -1,0 +1,1933 @@
+/* ════════════════════════════════════════════════════════
+   Apple-Inspired Design System
+   Layers on top of main.css — no base styles broken
+   ════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────── */
+:root {
+  --apple-font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  --apple-bg:        #f5f5f7;
+  --apple-surface:   #ffffff;
+  --apple-navy:      #06285f;
+  --apple-orange:    #fe8517;
+  --apple-text-1:    #1d1d1f;
+  --apple-text-2:    #6e6e73;
+  --apple-text-3:    #aeaeb2;
+  --apple-border:    rgba(0,0,0,0.08);
+  --apple-radius-sm: 8px;
+  --apple-radius-md: 14px;
+  --apple-radius-lg: 20px;
+  --apple-shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+  --apple-shadow-md: 0 8px 30px rgba(0,0,0,0.09);
+  --apple-shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+  --apple-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Base Typography ───────────────────────────────────── */
+body {
+  font-family: var(--apple-font) !important;
+  background-color: var(--apple-bg) !important;
+  color: var(--apple-text-1) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--apple-font) !important;
+  color: var(--apple-text-1) !important;
+  letter-spacing: -0.02em;
+}
+
+p, span, label, li {
+  font-family: var(--apple-font) !important;
+  color: var(--apple-text-2) !important;
+}
+
+/* ── Navbar / Header ───────────────────────────────────── */
+.header.navbar-area,
+.header-middle {
+  background: rgba(255,255,255,0.85) !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+  box-shadow: none !important;
+}
+
+.header .header-middle {
+  padding: 0.6rem 0 !important;
+}
+
+/* Hotline text */
+.nav-hotline h3 {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--apple-text-2) !important;
+  letter-spacing: 0;
+}
+
+.nav-hotline h3 span {
+  color: var(--apple-navy) !important;
+  font-weight: 700 !important;
+}
+
+/* Search bar */
+.search-form {
+  border-radius: 980px !important;
+  overflow: hidden;
+}
+
+.search-form input {
+  border-radius: 980px !important;
+  background: var(--apple-bg) !important;
+  border: 1px solid var(--apple-border) !important;
+  font-size: 14px !important;
+  padding: 10px 20px !important;
+  color: var(--apple-text-1) !important;
+  transition: var(--apple-transition);
+}
+
+/* ── Apple Search Bar — Spotlight Style ────────────────── */
+.apple-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+  /* fills the col-lg-5 it lives inside — no fixed max-width needed */
+}
+
+/* Globe / locale button */
+.apple-search-locale {
+  flex-shrink: 0;
+}
+
+.apple-locale-btn {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--apple-border) !important;
+  background: var(--apple-surface) !important;
+  color: var(--apple-text-2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease, color 0.2s ease !important;
+  padding: 0 !important;
+}
+
+.apple-locale-btn:hover {
+  background: var(--apple-bg) !important;
+  color: var(--apple-orange) !important;
+}
+
+.apple-locale-menu {
+  border: 1px solid var(--apple-border) !important;
+  border-radius: var(--apple-radius-md) !important;
+  box-shadow: var(--apple-shadow-md) !important;
+  background: var(--apple-surface) !important;
+  padding: 6px !important;
+  min-width: 130px !important;
+}
+
+.apple-locale-item {
+  display: block !important;
+  padding: 8px 14px !important;
+  border-radius: var(--apple-radius-sm) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--apple-text-1) !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease !important;
+}
+
+.apple-locale-item:hover {
+  background: var(--apple-bg) !important;
+  color: var(--apple-orange) !important;
+}
+
+/* ── Search field pill ──────────────────────────────────── */
+.apple-search-field {
+  flex: 1;
+  min-width: 0;        /* prevents flex child from overflowing */
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.apple-search-field input {
+  width: 100% !important;
+  height: 46px !important;
+  border-radius: 980px !important;
+  border: 1.5px solid var(--apple-border) !important;
+  background: var(--apple-surface) !important;
+  color: var(--apple-text-1) !important;
+  font-family: var(--apple-font) !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  padding: 0 44px 0 44px !important;
+  margin: 0 !important;           /* kill any inherited margin */
+  outline: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: var(--apple-shadow-sm) !important;
+}
+
+.apple-search-field input::placeholder {
+  color: var(--apple-text-3) !important;
+}
+
+.apple-search-field input:focus {
+  border-color: var(--apple-orange) !important;
+  box-shadow: 0 0 0 4px rgba(254,133,23,0.10), var(--apple-shadow-sm) !important;
+  background: var(--apple-surface) !important;
+}
+
+/* Search icon (magnifier, left inside pill) */
+.apple-search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--apple-text-3);
+  pointer-events: none;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+}
+
+/* Clear ✕ button */
+.apple-search-clear {
+  position: absolute !important;
+  right: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: var(--apple-text-3) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  color: #fff !important;
+  padding: 0 !important;
+  z-index: 2 !important;
+  transition: background 0.15s ease !important;
+}
+
+.apple-search-clear:hover {
+  background: var(--apple-text-2) !important;
+}
+
+/* ── Results dropdown — Spotlight card ──────────────────── */
+.apple-search-results {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;   /* align to full wrap width, not offset by globe */
+  right: 0;
+  background: var(--apple-surface);
+  border: 1px solid var(--apple-border);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.14), 0 4px 16px rgba(0,0,0,0.08);
+  overflow: hidden;
+  z-index: 9999;
+  max-height: 380px;
+  overflow-y: auto;
+  animation: searchDropIn 0.15s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+@keyframes searchDropIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.apple-search-results::-webkit-scrollbar { width: 4px; }
+.apple-search-results::-webkit-scrollbar-thumb {
+  background: var(--apple-border);
+  border-radius: 2px;
+}
+
+/* Each result row — Spotlight style */
+.apple-search-result-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 13px 20px !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+  transition: background 0.12s ease !important;
+  cursor: pointer;
+}
+
+.apple-search-result-item:last-child {
+  border-bottom: none !important;
+}
+
+.apple-search-result-item:hover {
+  background: var(--apple-bg) !important;
+}
+
+/* Magnifier icon prefix */
+.apple-result-icon {
+  color: var(--apple-text-3);
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* Product name — grows to fill */
+.apple-result-name {
+  flex: 1 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--apple-text-1) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--apple-font) !important;
+}
+
+/* Category + price grouped right */
+.apple-result-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.apple-result-category {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: var(--apple-orange) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.apple-result-price {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-2) !important;
+  white-space: nowrap;
+}
+
+/* ── Dark mode ──────────────────────────────────────────── */
+html.dark-mode .apple-search-field input {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .apple-search-field input:focus {
+  background: rgba(255,255,255,0.10) !important;
+}
+
+html.dark-mode .apple-locale-btn {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+
+html.dark-mode .apple-search-results {
+  background: #2c2c2e !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+html.dark-mode .apple-search-result-item {
+  border-color: rgba(255,255,255,0.05) !important;
+}
+
+html.dark-mode .apple-search-result-item:hover {
+  background: rgba(255,255,255,0.06) !important;
+}
+
+html.dark-mode .apple-result-name {
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .apple-locale-menu {
+  background: #2c2c2e !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+html.dark-mode .apple-locale-item {
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .apple-locale-item:hover {
+  background: rgba(255,255,255,0.06) !important;
+}
+
+
+/* Pill search field container */
+.apple-search-field {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.apple-search-field input {
+  width: 100% !important;
+  height: 38px !important;
+  border-radius: 980px !important;
+  border: 1px solid var(--apple-border) !important;
+  background: var(--apple-bg) !important;
+  color: var(--apple-text-1) !important;
+  font-family: var(--apple-font) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  padding: 0 36px 0 36px !important;
+  outline: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.apple-search-field input::placeholder {
+  color: var(--apple-text-3) !important;
+}
+
+.apple-search-field input:focus {
+  border-color: var(--apple-orange) !important;
+  box-shadow: 0 0 0 3px rgba(254,133,23,0.12) !important;
+  background: var(--apple-surface) !important;
+}
+
+/* Search icon (left side, inside input) */
+.apple-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--apple-text-3);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Clear ✕ button (right side, inside input) */
+.apple-search-clear {
+  position: absolute !important;
+  right: 10px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: var(--apple-text-3) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 16px !important;
+  height: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  color: #fff !important;
+  padding: 0 !important;
+  z-index: 2 !important;
+  transition: background 0.15s ease !important;
+}
+
+.apple-search-clear:hover {
+  background: var(--apple-text-2) !important;
+}
+
+/* Globe / locale button */
+.apple-search-locale {
+  flex-shrink: 0;
+}
+
+.apple-locale-btn {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--apple-border) !important;
+  background: var(--apple-surface) !important;
+  color: var(--apple-text-2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease, color 0.2s ease !important;
+  padding: 0 !important;
+}
+
+.apple-locale-btn:hover {
+  background: var(--apple-bg) !important;
+  color: var(--apple-orange) !important;
+}
+
+.apple-locale-menu {
+  border: 1px solid var(--apple-border) !important;
+  border-radius: var(--apple-radius-md) !important;
+  box-shadow: var(--apple-shadow-md) !important;
+  background: var(--apple-surface) !important;
+  padding: 6px !important;
+  min-width: 130px !important;
+}
+
+.apple-locale-item {
+  display: block !important;
+  padding: 8px 14px !important;
+  border-radius: var(--apple-radius-sm) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--apple-text-1) !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease !important;
+}
+
+.apple-locale-item:hover {
+  background: var(--apple-bg) !important;
+  color: var(--apple-orange) !important;
+}
+
+/* Results dropdown */
+.apple-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 42px; /* aligns with search field, not globe */
+  right: 0;
+  background: var(--apple-surface);
+  border: 1px solid var(--apple-border);
+  border-radius: var(--apple-radius-lg);
+  box-shadow: var(--apple-shadow-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  z-index: 9999;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.apple-search-results::-webkit-scrollbar {
+  width: 4px;
+}
+.apple-search-results::-webkit-scrollbar-thumb {
+  background: var(--apple-border);
+  border-radius: 2px;
+}
+
+/* Each result row */
+.apple-search-result-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 16px !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+  transition: background 0.15s ease !important;
+}
+
+.apple-search-result-item:last-child {
+  border-bottom: none !important;
+}
+
+.apple-search-result-item:hover {
+  background: var(--apple-bg) !important;
+}
+
+/* Product thumbnail */
+.apple-result-img {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--apple-radius-sm);
+  overflow: hidden;
+  background: var(--apple-bg);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.apple-result-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+/* Name + category */
+.apple-result-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.apple-result-name {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--apple-text-1) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.apple-result-category {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--apple-orange) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Price on the right */
+.apple-result-price {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Dark mode */
+html.dark-mode .apple-search-field input {
+  background: #3a3a3c !important;
+  border-color: var(--apple-border) !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .apple-locale-btn {
+  background: #3a3a3c !important;
+}
+
+html.dark-mode .apple-search-results {
+  background: #2c2c2e !important;
+  border-color: var(--apple-border) !important;
+}
+
+html.dark-mode .apple-result-img {
+  background: #3a3a3c !important;
+}
+
+html.dark-mode .apple-search-result-item:hover {
+  background: #3a3a3c !important;
+}
+
+
+
+.search-form input:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(254,133,23,0.12) !important;
+  border-color: var(--apple-orange) !important;
+}
+
+/* ── Navbar Bottom (category row) ─────────────────────── */
+.hero-area + section,
+.hero-area {
+  margin-top: 0 !important;
+}
+
+/* ── Breadcrumbs ───────────────────────────────────────── */
+.breadcrumbs {
+  background: var(--apple-surface) !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+  box-shadow: none !important;
+  padding: 18px 0 !important;
+}
+
+.breadcrumbs .page-title {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+  letter-spacing: -0.03em;
+}
+
+.breadcrumb-nav li,
+.breadcrumb-nav li a {
+  font-size: 13px !important;
+  color: var(--apple-text-2) !important;
+}
+
+.breadcrumb-nav li a:hover {
+  color: var(--apple-orange) !important;
+}
+
+/* ── Section Titles ────────────────────────────────────── */
+.section-title h2 {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+  letter-spacing: -0.03em !important;
+  margin-bottom: 8px !important;
+}
+
+.section-title p {
+  font-size: 15px !important;
+  color: var(--apple-text-2) !important;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Trending / Shop Section Background ────────────────── */
+.trending-product {
+  background-color: var(--apple-bg) !important;
+  padding-top: 48px !important;
+  padding-bottom: 64px !important;
+}
+
+/* ── Product card: full-card clickable overlay ─────────── */
+.product-card-clickable {
+  position: relative !important;
+}
+
+/* The invisible link covers the whole card */
+.product-card-overlay-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--apple-radius-lg);
+  display: block;
+}
+
+/* Add to Cart button floats ABOVE the overlay */
+.product-atc-btn {
+  position: absolute !important;
+  z-index: 2 !important;
+}
+
+/* ── Add to Cart icon button — pinned to image corner ────── */
+/*  Always visible, small round, z-index above card overlay  */
+.btn-atc-icon {
+  position: absolute !important;
+  bottom: 12px !important;
+  right: 12px !important;
+  z-index: 3 !important;           /* above .product-card-overlay-link (z-index:1) */
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  border: 2px solid rgba(254, 133, 23, 0.85) !important;
+  background: rgba(254, 133, 23, 0.60) !important;
+  color: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease !important;
+  box-shadow: 0 2px 10px rgba(254,133,23,0.25) !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  /* always shown — no opacity/visibility tricks */
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.btn-atc-icon:hover {
+  background: rgba(254, 133, 23, 1) !important;
+  border-color: #fe8517 !important;
+  transform: scale(1.12) !important;
+  box-shadow: 0 6px 18px rgba(254,133,23,0.40) !important;
+}
+
+.btn-atc-icon:active {
+  transform: scale(0.96) !important;
+}
+
+.btn-atc-icon i,
+.btn-atc-icon svg {
+  pointer-events: none;
+  display: block;
+}
+
+/* Ensure product-image is positioned so the button can be absolute inside it */
+.single-product .product-image {
+  position: relative !important;
+}
+
+/* ── Add to Cart button — orange 60% transparent ────────── */
+
+/*  Trending card + product details page               */
+.btn-atc,
+.single-product .product-image .button .btn,
+.item-details .product-info .cart-button .btn {
+  background: rgba(254, 133, 23, 0.60) !important;
+  border: 2px solid rgba(254, 133, 23, 0.80) !important;
+  color: #fff !important;
+  border-radius: 980px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.02em !important;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease !important;
+  box-shadow: 0 2px 12px rgba(254,133,23,0.20) !important;
+}
+
+.btn-atc:hover,
+.single-product .product-image .button .btn:hover,
+.item-details .product-info .cart-button .btn:hover {
+  background: rgba(254, 133, 23, 1) !important;
+  border-color: #fe8517 !important;
+  color: #fff !important;
+  transform: scale(1.04) !important;
+  box-shadow: 0 6px 20px rgba(254,133,23,0.38) !important;
+}
+
+/* On product details page the button is full-width — keep it, just restyle */
+.item-details .product-info .cart-button .btn {
+  border-radius: var(--apple-radius-sm) !important;
+  font-size: 15px !important;
+  height: 50px !important;
+}
+
+/* Dedicated rule for the details page Add to Cart — guaranteed to win */
+.btn-atc-details {
+  display: block !important;
+  width: 100% !important;
+  padding: 15px 28px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  border-radius: var(--apple-radius-sm) !important;
+  background: rgba(254, 133, 23, 0.60) !important;
+  border: 2px solid rgba(254, 133, 23, 0.85) !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease !important;
+  box-shadow: 0 2px 12px rgba(254,133,23,0.18) !important;
+  font-family: var(--apple-font) !important;
+}
+
+.btn-atc-details:hover {
+  background: rgba(254, 133, 23, 1) !important;
+  border-color: #fe8517 !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 24px rgba(254,133,23,0.35) !important;
+}
+
+/* ── Details page button row ───────────────────────────── */
+.details-action-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.details-action-row .btn-atc-details,
+.details-action-row .btn-buy-now {
+  flex: 1 1 0;
+  min-width: 140px;
+}
+
+/* Buy Now — solid navy, fills on hover to slightly lighter */
+.btn-buy-now {
+  display: block !important;
+  width: 100% !important;
+  padding: 15px 28px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  border-radius: var(--apple-radius-sm) !important;
+  background: var(--apple-navy) !important;
+  border: 2px solid var(--apple-navy) !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease !important;
+  box-shadow: 0 2px 12px rgba(6,40,95,0.18) !important;
+  font-family: var(--apple-font) !important;
+}
+
+.btn-buy-now:hover {
+  background: #0a3d8f !important;
+  border-color: #0a3d8f !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 24px rgba(6,40,95,0.28) !important;
+}
+
+
+
+/* ── Product Cards ─────────────────────────────────────── */
+
+.single-product {
+  border: none !important;
+  border-radius: var(--apple-radius-lg) !important;
+  box-shadow: var(--apple-shadow-sm) !important;
+  background: var(--apple-surface) !important;
+  padding: 0 !important;
+  margin-top: 24px !important;
+  overflow: hidden;
+  transition: var(--apple-transition) !important;
+}
+
+.single-product:hover {
+  box-shadow: var(--apple-shadow-md) !important;
+  transform: translateY(-4px);
+}
+
+.single-product .product-image {
+  border-radius: 0 !important;
+  background: var(--apple-bg);
+  height: 240px !important;
+}
+
+.single-product .product-image img {
+  object-fit: contain !important;
+  padding: 16px;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1) !important;
+}
+
+.single-product:hover .product-image img {
+  transform: scale(1.06) !important;
+}
+
+.single-product .product-info {
+  padding: 16px 18px 20px !important;
+  background: var(--apple-surface) !important;
+}
+
+.single-product .product-info .category {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.07em !important;
+  color: var(--apple-orange) !important;
+  margin-bottom: 5px !important;
+}
+
+.single-product .product-info .title a {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--apple-text-1) !important;
+  line-height: 1.35;
+}
+
+.single-product .product-info .title a:hover {
+  color: var(--apple-orange) !important;
+}
+
+.single-product .product-info .price span {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+}
+
+.single-product .product-info .price .discount-price {
+  color: var(--apple-text-3) !important;
+  font-size: 13px !important;
+}
+
+/* Hover "Add to Cart" button */
+.single-product .product-image .button .btn {
+  border-radius: 980px !important;
+  padding: 10px 22px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+}
+
+/* ── Hero Area ─────────────────────────────────────────── */
+.hero-area {
+  background: var(--apple-bg) !important;
+}
+
+.hero-area .slider-head {
+  border-radius: 0 !important;
+}
+
+/* ── Shipping Info Bar ─────────────────────────────────── */
+.shipping-info {
+  background: var(--apple-surface) !important;
+  border-top: 1px solid var(--apple-border) !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+  padding: 32px 0 !important;
+}
+
+.shipping-info li {
+  border: none !important;
+  border-right: 1px solid var(--apple-border) !important;
+  padding: 20px 30px !important;
+}
+
+.shipping-info li:last-child {
+  border-right: none !important;
+}
+
+.shipping-info .media-icon i {
+  color: var(--apple-orange) !important;
+  font-size: 28px !important;
+}
+
+.shipping-info .media-body h5 {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+}
+
+.shipping-info .media-body span {
+  font-size: 12px !important;
+  color: var(--apple-text-2) !important;
+}
+
+/* ── Item Details (Product Page) ───────────────────────── */
+.item-details {
+  background: var(--apple-bg) !important;
+  padding: 48px 0 64px !important;
+}
+
+/* Narrow the container on the product detail page only (has .top-area) */
+.item-details .top-area ~ * > .container,
+.item-details > .container:has(.top-area) {
+  max-width: 1020px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+/* Checkout inside .item-details — reset to full width */
+.item-details > .container:has(.checkout-container) {
+  max-width: 100% !important;
+  padding-left: 2% !important;
+  padding-right: 2% !important;
+}
+
+.item-details .top-area {
+  background: var(--apple-surface) !important;
+  border-radius: var(--apple-radius-lg) !important;
+  border: none !important;
+  box-shadow: var(--apple-shadow-sm) !important;
+  padding: 40px !important;
+  width: 100% !important;
+}
+
+/* Make sure the row fills the card properly */
+.item-details .top-area > .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+/* Product image gallery */
+.product-images #gallery .main-img img {
+  border-radius: var(--apple-radius-md) !important;
+  object-fit: contain;
+  background: var(--apple-bg);
+  padding: 16px;
+  max-height: 420px;
+  width: 100%;
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.product-images #gallery .main-img img:hover {
+  transform: scale(1.02);
+}
+
+.product-images #gallery .images {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.product-images #gallery .images img {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  border-radius: var(--apple-radius-sm) !important;
+  border: 2px solid transparent !important;
+  background: var(--apple-bg);
+  padding: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.product-images #gallery .images img:hover {
+  border-color: var(--apple-orange) !important;
+}
+
+/* Product info panel */
+.product-info .title {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.2 !important;
+  margin-bottom: 8px !important;
+}
+
+.product-info .category {
+  font-size: 13px !important;
+  color: var(--apple-text-2) !important;
+  margin-bottom: 16px !important;
+}
+
+.product-info .category i {
+  color: var(--apple-orange) !important;
+}
+
+.product-info .price {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+  margin-bottom: 16px !important;
+}
+
+.product-info .info-text {
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  color: var(--apple-text-2) !important;
+  margin-bottom: 24px !important;
+}
+
+.product-info .title-label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--apple-text-2) !important;
+  margin-bottom: 6px !important;
+}
+
+/* Stock badge */
+.product-info .color-option p {
+  display: inline-block;
+  background: rgba(52,199,89,0.12) !important;
+  color: #1c7a2e !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  padding: 4px 12px;
+  border-radius: 980px;
+}
+
+/* Cart/wish buttons on details page */
+.item-details .product-info .cart-button .btn,
+.item-details .product-info .wish-button .btn {
+  border-radius: var(--apple-radius-sm) !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  height: 50px !important;
+  transition: var(--apple-transition) !important;
+}
+
+
+/* ── Checkout Page ─────────────────────────────────────── */
+
+/* Section background */
+.item-details.section {
+  background: var(--apple-bg) !important;
+  padding: 40px 0 64px !important;
+}
+
+/* Override container max-width override from product page — checkout needs full width */
+.checkout-container > .container {
+  max-width: 1200px !important;
+}
+
+/* ── Main card wrapping the step list ── */
+.checkout-container .card {
+  background: var(--apple-surface) !important;
+  border: none !important;
+  border-radius: var(--apple-radius-lg) !important;
+  box-shadow: var(--apple-shadow-sm) !important;
+  margin-bottom: 0 !important;
+}
+
+.checkout-container .card-body {
+  padding: 32px 28px !important;
+}
+
+/* ── Step timeline ── */
+.activity-checkout {
+  padding-left: 0 !important;
+}
+
+.activity-checkout .checkout-item {
+  border-left: 2px solid var(--apple-border) !important;
+  padding-bottom: 32px !important;
+  padding-left: 40px !important;
+}
+
+.activity-checkout .checkout-item:first-child {
+  border-color: var(--apple-orange) !important;
+}
+
+.activity-checkout .checkout-item:last-child {
+  border-color: transparent !important;
+  padding-bottom: 8px !important;
+}
+
+/* ── Step icon circle ── */
+.checkout-container .avatar.checkout-icon {
+  position: absolute !important;
+  top: -4px !important;
+  left: -24px !important;
+}
+
+.checkout-container .avatar-title.rounded-circle.bg-primary {
+  background: var(--apple-orange) !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  font-size: 18px !important;
+  box-shadow: 0 4px 14px rgba(254,133,23,0.30) !important;
+}
+
+/* ── Step headings ── */
+.activity-checkout .feed-item-list h5.font-size-16 {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--apple-text-1) !important;
+  margin-bottom: 4px !important;
+}
+
+.activity-checkout .feed-item-list p.text-muted {
+  font-size: 13px !important;
+  color: var(--apple-text-2) !important;
+  margin-bottom: 20px !important;
+}
+
+/* ── Form inputs inside checkout ── */
+.activity-checkout .form-label,
+.checkout-container label.form-label {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--apple-text-2) !important;
+  margin-bottom: 6px !important;
+  font-family: var(--apple-font) !important;
+}
+
+.activity-checkout .form-control,
+.checkout-container .form-control {
+  border-radius: var(--apple-radius-sm) !important;
+  border: 1.5px solid var(--apple-border) !important;
+  background: var(--apple-bg) !important;
+  padding: 11px 14px !important;
+  font-size: 14px !important;
+  color: var(--apple-text-1) !important;
+  font-family: var(--apple-font) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.activity-checkout .form-control:focus,
+.checkout-container .form-control:focus {
+  border-color: var(--apple-orange) !important;
+  box-shadow: 0 0 0 4px rgba(254,133,23,0.10) !important;
+  outline: none !important;
+  background: var(--apple-surface) !important;
+}
+
+.activity-checkout .form-control::placeholder {
+  color: var(--apple-text-3) !important;
+}
+
+/* ── Shipping method cards ── */
+.card-radio {
+  background: var(--apple-bg) !important;
+  border: 2px solid var(--apple-border) !important;
+  border-radius: var(--apple-radius-md) !important;
+  padding: 12px 8px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  text-align: center;
+}
+
+.card-radio:hover {
+  border-color: var(--apple-orange) !important;
+  box-shadow: 0 0 0 3px rgba(254,133,23,0.10) !important;
+}
+
+.card-radio-input:checked + .card-radio {
+  border-color: var(--apple-orange) !important;
+  background: rgba(254,133,23,0.06) !important;
+  box-shadow: 0 0 0 3px rgba(254,133,23,0.14) !important;
+}
+
+.card-radio span.fs-14,
+.card-radio span {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--apple-text-1) !important;
+}
+
+/* Payment method icon */
+.card-radio i.h2 {
+  font-size: 28px !important;
+  color: var(--apple-text-2) !important;
+  margin-bottom: 8px !important;
+}
+
+.card-radio-input:checked + .card-radio i.h2 {
+  color: var(--apple-orange) !important;
+}
+
+/* Disabled payment option */
+.card-radio-input:disabled + .card-radio {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+}
+
+/* ── Payment section subtitle ── */
+.activity-checkout h5.font-size-14 {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.07em !important;
+  color: var(--apple-text-2) !important;
+  margin-bottom: 14px !important;
+}
+
+/* ── Bottom action row ── */
+.checkout-container .row.my-4 {
+  margin-top: 24px !important;
+  padding-top: 20px !important;
+  border-top: 1px solid var(--apple-border) !important;
+}
+
+/* Continue shopping link */
+.checkout-container .btn-link.text-muted {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--apple-text-2) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+  padding: 10px 0 !important;
+}
+
+.checkout-container .btn-link.text-muted:hover {
+  color: var(--apple-orange) !important;
+}
+
+/* Proceed button */
+.checkout-container #Procced,
+.checkout-container .btn-success {
+  background: var(--apple-orange) !important;
+  border: none !important;
+  border-radius: var(--apple-radius-sm) !important;
+  padding: 12px 32px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  letter-spacing: 0.01em !important;
+  font-family: var(--apple-font) !important;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease !important;
+  box-shadow: 0 4px 16px rgba(254,133,23,0.28) !important;
+  cursor: pointer !important;
+}
+
+.checkout-container #Procced:hover,
+.checkout-container .btn-success:hover {
+  background: #e57612 !important;
+  box-shadow: 0 8px 24px rgba(254,133,23,0.40) !important;
+  transform: translateY(-1px) !important;
+}
+
+.checkout-container #Procced:disabled {
+  opacity: 0.65 !important;
+  transform: none !important;
+  cursor: not-allowed !important;
+}
+
+/* ── Order Summary card (right column) ── */
+.checkout-order-summary {
+  background: var(--apple-surface) !important;
+  border: none !important;
+  border-radius: var(--apple-radius-lg) !important;
+  box-shadow: var(--apple-shadow-sm) !important;
+  position: sticky !important;
+  top: 90px !important;
+  overflow: hidden !important;
+}
+
+.checkout-order-summary .card-body {
+  padding: 0 !important;
+}
+
+/* Summary header */
+.checkout-order-summary .p-3.bg-light {
+  background: var(--apple-bg) !important;
+  padding: 18px 22px !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+}
+
+.checkout-order-summary .font-size-16.mb-0 {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.checkout-order-summary .font-size-16.mb-0 span.float-end {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--apple-text-3) !important;
+}
+
+/* Table */
+.checkout-order-summary .table {
+  margin-bottom: 0 !important;
+  font-family: var(--apple-font) !important;
+}
+
+.checkout-order-summary .table thead th {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.07em !important;
+  color: var(--apple-text-2) !important;
+  border-top: none !important;
+  padding: 12px 16px !important;
+  background: transparent !important;
+}
+
+.checkout-order-summary .table tbody td,
+.checkout-order-summary .table tbody th {
+  padding: 14px 16px !important;
+  vertical-align: middle !important;
+  border-color: var(--apple-border) !important;
+  font-family: var(--apple-font) !important;
+}
+
+/* Product name in table */
+.checkout-order-summary .font-size-16.text-truncate a.text-dark {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--apple-text-1) !important;
+}
+
+.checkout-order-summary .font-size-16.text-truncate a.text-dark:hover {
+  color: var(--apple-orange) !important;
+}
+
+/* Price & qty meta */
+.checkout-order-summary .text-muted {
+  font-size: 12px !important;
+  color: var(--apple-text-2) !important;
+}
+
+/* Product thumbnail in table */
+.checkout-order-summary .avatar-lg {
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: var(--apple-radius-sm) !important;
+  object-fit: contain !important;
+  background: var(--apple-bg) !important;
+  padding: 6px !important;
+}
+
+/* Totals rows */
+.checkout-order-summary .table tbody tr td h5.font-size-14 {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--apple-text-2) !important;
+  margin: 0 !important;
+}
+
+/* Grand total row */
+.checkout-order-summary .table tbody tr.bg-light {
+  background: var(--apple-bg) !important;
+}
+
+.checkout-order-summary .table tbody tr.bg-light td h5.font-size-14 {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+}
+
+.checkout-order-summary .table tbody tr.bg-light td {
+  font-weight: 700 !important;
+  color: var(--apple-orange) !important;
+  font-size: 15px !important;
+}
+
+/* Star ratings */
+.checkout-order-summary .bx.bxs-star,
+.checkout-order-summary .bx.bxs-star-half {
+  font-size: 11px !important;
+  color: #f5a623 !important;
+}
+
+/* ── Dark mode for checkout ── */
+html.dark-mode .activity-checkout .form-control,
+html.dark-mode .checkout-container .form-control {
+  background: #3a3a3c !important;
+  border-color: var(--apple-border) !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .card-radio {
+  background: #3a3a3c !important;
+  border-color: var(--apple-border) !important;
+}
+
+html.dark-mode .card-radio-input:checked + .card-radio {
+  background: rgba(254,133,23,0.12) !important;
+}
+
+html.dark-mode .checkout-order-summary .p-3.bg-light,
+html.dark-mode .checkout-order-summary .table tbody tr.bg-light {
+  background: #3a3a3c !important;
+}
+
+html.dark-mode .checkout-container .card,
+html.dark-mode .checkout-order-summary {
+  background: var(--apple-surface) !important;
+}
+
+/* Legacy selectors kept for compat */
+.checkout-wrapper,
+.checkout-area,
+section.checkout {
+  background: var(--apple-bg) !important;
+}
+
+.checkout-steps,
+.checkout-form,
+.single-widget,
+.checkout-area .form-head,
+.single-payment,
+.order-summary {
+  background: var(--apple-surface) !important;
+  border-radius: var(--apple-radius-lg) !important;
+  border: none !important;
+  box-shadow: var(--apple-shadow-sm) !important;
+  padding: 28px !important;
+  margin-bottom: 20px !important;
+}
+
+.checkout-area input,
+.checkout-area select,
+.checkout-area textarea,
+.checkout-area .form-control {
+  border-radius: var(--apple-radius-sm) !important;
+  border: 1px solid var(--apple-border) !important;
+  background: var(--apple-bg) !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  color: var(--apple-text-1) !important;
+  transition: var(--apple-transition) !important;
+  font-family: var(--apple-font) !important;
+}
+
+.checkout-area input:focus,
+.checkout-area select:focus,
+.checkout-area textarea:focus,
+.checkout-area .form-control:focus {
+  border-color: var(--apple-orange) !important;
+  box-shadow: 0 0 0 4px rgba(254,133,23,0.1) !important;
+  outline: none !important;
+  background: var(--apple-surface) !important;
+}
+
+.checkout-area label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--apple-text-1) !important;
+  margin-bottom: 6px !important;
+  font-family: var(--apple-font) !important;
+}
+
+/* ── Buttons — Global Apple-style ──────────────────────── */
+.button .btn,
+.btn-hero {
+  font-family: var(--apple-font) !important;
+  border-radius: 980px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  transition: var(--apple-transition) !important;
+}
+
+.button .btn:hover {
+  transform: scale(1.03);
+}
+
+/* ── Footer ────────────────────────────────────────────── */
+.footer {
+  background: var(--apple-navy) !important;
+}
+
+.footer-top {
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+  padding: 40px 0 !important;
+}
+
+.footer-top .title {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  letter-spacing: -0.02em !important;
+}
+
+.footer-top .title span {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: rgba(255,255,255,0.55) !important;
+  display: block;
+  margin-top: 4px;
+}
+
+.footer .newsletter-form input {
+  border-radius: 980px !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  background: rgba(255,255,255,0.08) !important;
+  color: #fff !important;
+  padding: 12px 22px !important;
+  font-family: var(--apple-font) !important;
+}
+
+.footer .newsletter-form input::placeholder {
+  color: rgba(255,255,255,0.4) !important;
+}
+
+.footer-bottom {
+  padding: 20px 0 !important;
+}
+
+.footer-bottom .copyright p {
+  font-size: 13px !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+
+.footer-bottom .copyright p a {
+  color: rgba(255,255,255,0.8) !important;
+  font-weight: 600;
+}
+
+.footer-bottom .payment-gateway span {
+  font-size: 12px !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+
+/* Social links in footer */
+.footer .socila li a i {
+  color: rgba(255,255,255,0.6) !important;
+  transition: color 0.2s ease;
+}
+
+.footer .socila li a:hover i {
+  color: var(--apple-orange) !important;
+}
+
+/* ── Scroll-to-top button ──────────────────────────────── */
+.scroll-top {
+  border-radius: 50% !important;
+  background: var(--apple-orange) !important;
+  border: none !important;
+  box-shadow: var(--apple-shadow-md) !important;
+  width: 42px !important;
+  height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ── Image modal ───────────────────────────────────────── */
+.modal {
+  background: rgba(0,0,0,0.75) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.modal-content {
+  border-radius: var(--apple-radius-lg) !important;
+  max-width: 90vw !important;
+  max-height: 90vh !important;
+  object-fit: contain !important;
+  box-shadow: var(--apple-shadow-lg) !important;
+}
+
+/* ── Sale/New tags on product image ────────────────────── */
+.sale-tag,
+.new-tag {
+  border-radius: 980px !important;
+  font-size: 10px !important;
+  padding: 4px 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* ── Preloader ─────────────────────────────────────────── */
+.preloader {
+  background: var(--apple-surface) !important;
+}
+
+/* ── Alerts / Flash messages ───────────────────────────── */
+.alert-message {
+  border-radius: var(--apple-radius-sm) !important;
+  font-family: var(--apple-font) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 14px 24px !important;
+  box-shadow: var(--apple-shadow-md) !important;
+  border: none !important;
+}
+
+/* ── Dark mode tokens update ───────────────────────────── */
+html.dark-mode {
+  --apple-bg:      #1c1c1e;
+  --apple-surface: #2c2c2e;
+  --apple-text-1:  #f5f5f7;
+  --apple-text-2:  #aeaeb2;
+  --apple-text-3:  #636366;
+  --apple-border:  rgba(255,255,255,0.1);
+}
+
+html.dark-mode body {
+  background-color: var(--apple-bg) !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .header.navbar-area,
+html.dark-mode .header-middle {
+  background: rgba(28,28,30,0.9) !important;
+  border-color: var(--apple-border) !important;
+}
+
+html.dark-mode .single-product {
+  background: var(--apple-surface) !important;
+}
+
+html.dark-mode .single-product .product-image {
+  background: #3a3a3c !important;
+}
+
+html.dark-mode .item-details .top-area {
+  background: var(--apple-surface) !important;
+}
+
+html.dark-mode .product-images #gallery .main-img img,
+html.dark-mode .product-images #gallery .images img {
+  background: #3a3a3c !important;
+}
+
+html.dark-mode .search-form input {
+  background: #3a3a3c !important;
+  border-color: var(--apple-border) !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .checkout-area input,
+html.dark-mode .checkout-area select,
+html.dark-mode .checkout-area textarea,
+html.dark-mode .checkout-area .form-control {
+  background: #3a3a3c !important;
+  border-color: var(--apple-border) !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .shipping-info {
+  background: var(--apple-surface) !important;
+  border-color: var(--apple-border) !important;
+}
+
+html.dark-mode .shipping-info li {
+  border-color: var(--apple-border) !important;
+}
+
+html.dark-mode .breadcrumbs {
+  background: var(--apple-surface) !important;
+  border-color: var(--apple-border) !important;
+}
+
+/* ── Shop Page Filter Card ─────────────────────────────── */
+.products-filter-page {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  background: var(--apple-bg) !important;
+  padding: 32px 2% !important;
+}
+
+.filter-category-card {
+  width: 240px !important;
+  min-width: 220px !important;
+  flex-shrink: 0;
+  background: var(--apple-surface) !important;
+  border-radius: var(--apple-radius-lg) !important;
+  border: none !important;
+  box-shadow: var(--apple-shadow-sm) !important;
+  padding: 24px 20px !important;
+  margin: 0 20px 0 0 !important;
+  position: sticky;
+  top: 90px;
+}
+
+.filter-category-card h3 {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: var(--apple-text-1) !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+}
+
+.filter-category {
+  margin-bottom: 20px !important;
+}
+
+.filter-category br {
+  display: none !important;
+}
+
+.filter-category-title h6 {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--apple-text-2) !important;
+  margin-bottom: 8px !important;
+}
+
+.filter-category-select {
+  width: 100% !important;
+  padding: 9px 14px !important;
+  border-radius: var(--apple-radius-sm) !important;
+  border: 1px solid var(--apple-border) !important;
+  background: var(--apple-bg) !important;
+  color: var(--apple-text-1) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  font-family: var(--apple-font) !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236e6e73' d='M6 8L1 3h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  cursor: pointer !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.filter-category-select:focus {
+  outline: none !important;
+  border-color: var(--apple-orange) !important;
+  box-shadow: 0 0 0 3px rgba(254,133,23,0.12) !important;
+}
+
+/* Price range slider */
+.filter-category .form-range {
+  width: 100% !important;
+  accent-color: var(--apple-orange) !important;
+  cursor: pointer !important;
+  margin-bottom: 8px !important;
+}
+
+.price-range {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.price-range span {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--apple-text-2) !important;
+}
+
+.price-range span:last-child {
+  color: var(--apple-orange) !important;
+  font-weight: 700 !important;
+}
+
+/* Products container next to filter */
+.products-filter-page > .container {
+  flex: 1 !important;
+  background: transparent !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Remove inline background hack from blade */
+.products-filter-page [style*="background-color: #ffffff"] {
+  background-color: transparent !important;
+}
+
+/* Show/search row */
+.products-filter-page .dataTables_length label,
+.products-filter-page .dataTables_filter label {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--apple-text-2) !important;
+  font-family: var(--apple-font) !important;
+}
+
+.products-filter-page .form-select,
+.products-filter-page .form-control {
+  border-radius: var(--apple-radius-sm) !important;
+  border: 1px solid var(--apple-border) !important;
+  background: var(--apple-surface) !important;
+  font-size: 13px !important;
+  font-family: var(--apple-font) !important;
+  color: var(--apple-text-1) !important;
+}
+
+/* Pagination */
+.products-filter-page .dataTables_info {
+  font-size: 13px !important;
+  color: var(--apple-text-2) !important;
+}
+
+/* Dark mode filter card */
+html.dark-mode .filter-category-card {
+  background: var(--apple-surface) !important;
+  border-color: var(--apple-border) !important;
+}
+
+html.dark-mode .filter-category-select {
+  background: #3a3a3c !important;
+  border-color: var(--apple-border) !important;
+  color: var(--apple-text-1) !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   BORDER POLICY
+   — Ghost/transparent buttons: KEEP their border (it's what
+     makes them visible against any background)
+   — Solid-fill buttons: NO border (fill is enough contrast)
+   ════════════════════════════════════════════════════════ */
+
+/* ── Solid buttons → no border ──────────────────────────── */
+.btn-atc-details,
+.btn-buy-now,
+.btn-atc-icon,
+.btn-atc-details:hover,
+.btn-buy-now:hover,
+.btn-atc-icon:hover,
+/* ghost buttons that FILL on hover → also drop border on hover */
+.button .btn:hover,
+.btn-hero:hover,
+.header.sticky .button .btn:hover,
+.call-action .content .button .btn:hover,
+.hero-area .hero-small-banner.style2 .content .button .btn:hover,
+.footer .footer-top .footer-newsletter .newsletter-form .button .btn:hover,
+.footer .footer-middle .newsletter-form .button .btn:hover,
+html.dark-mode .button .btn:hover,
+html.dark-mode .btn-primary:hover {
+  border: none !important;
+}
+
+/* ── Ghost/transparent buttons → restore their border ────── */
+/* These are transparent by default so the border is essential */
+.button .btn,
+.btn-hero,
+.header.sticky .button .btn,
+.call-action .content .button .btn,
+.hero-area .hero-small-banner.style2 .content .button .btn,
+.footer .footer-top .footer-newsletter .newsletter-form .button .btn,
+.footer .footer-middle .newsletter-form .button .btn,
+html.dark-mode .button .btn,
+html.dark-mode .btn-primary {
+  border: 2px solid currentColor !important;
+}
+
+/* Banner slide: white ghost button — override currentColor to white */
+.single-slider--banner .btn-hero {
+  border: 2px solid rgba(255,255,255,0.80) !important;
+}
+
+.single-slider--banner .btn-hero:hover {
+  border: none !important;
+}
+
+/* Call-action & small-banner on white overlay → keep white border */
+.call-action .content .button .btn,
+.hero-area .hero-small-banner.style2 .content .button .btn {
+  border: 2px solid rgba(255,255,255,0.70) !important;
+}
+
+
+
