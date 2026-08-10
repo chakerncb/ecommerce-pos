@@ -370,7 +370,17 @@
             });
         }
 
-        //======== Brand Slider (only init if element exists on this page)
+        //======== Mobile filter panel toggle (shop & search pages)
+        document.querySelectorAll('.filter-mobile-toggle').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var panelId = this.getAttribute('aria-controls');
+                var panel = document.getElementById(panelId);
+                if (!panel) return;
+                var isOpen = panel.classList.toggle('is-open');
+                this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+        });
+
         if (document.querySelector('.brands-logo-carousel')) {
             tns({
                 container: '.brands-logo-carousel',

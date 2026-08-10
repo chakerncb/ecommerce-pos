@@ -1,5 +1,14 @@
 <section class="products-filter-page section">
-    <div class="filter-category-card">
+
+    {{-- Mobile filter toggle --}}
+    <button class="filter-mobile-toggle" id="searchFilterToggle" aria-expanded="false" aria-controls="searchFilterPanel">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>
+        </svg>
+        Filters
+    </button>
+
+    <div class="filter-category-card" id="searchFilterPanel">
         <h3>Filter :</h3>
         <div class="filter-category">
             <br>

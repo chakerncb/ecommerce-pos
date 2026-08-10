@@ -1931,3 +1931,222 @@ html.dark-mode .btn-primary {
 
 
 
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE — Shop & Search Pages
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Mobile filter toggle button (hidden on desktop) ─────── */
+.filter-mobile-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 16px;
+  padding: 10px 18px;
+  border-radius: 980px;
+  border: 1.5px solid var(--apple-orange);
+  background: var(--apple-surface);
+  color: var(--apple-orange);
+  font-family: var(--apple-font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--apple-shadow-sm);
+  width: calc(100% - 32px);
+  justify-content: center;
+}
+
+.filter-mobile-toggle:hover {
+  background: rgba(254,133,23,0.08);
+  box-shadow: 0 0 0 3px rgba(254,133,23,0.12);
+}
+
+.filter-mobile-toggle[aria-expanded="true"] {
+  background: var(--apple-orange);
+  color: #fff;
+}
+
+/* ── Tablet (768px – 991px): side-by-side, narrower sidebar ─ */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .products-filter-page {
+    padding: 20px 2% !important;
+    gap: 16px !important;
+    align-items: flex-start !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .filter-category-card {
+    width: 200px !important;
+    min-width: 180px !important;
+    margin: 0 !important;
+    padding: 16px 14px !important;
+    top: 80px;
+  }
+
+  .products-filter-page > .container {
+    padding: 0 !important;
+    min-width: 0 !important;
+  }
+
+  /* 2-column product grid on tablet */
+  .products-filter-page .col-lg-3.col-md-6.col-12 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+/* ── Mobile (< 768px): stacked layout, collapsible filter ── */
+@media (max-width: 767px) {
+  .products-filter-page {
+    flex-direction: column !important;
+    padding: 0 0 24px !important;
+    gap: 0 !important;
+    align-items: stretch !important;
+  }
+
+  .filter-mobile-toggle {
+    display: flex !important;
+  }
+
+  /* Filter card: collapsed by default */
+  .filter-category-card {
+    width: calc(100% - 32px) !important;
+    min-width: 0 !important;
+    margin: 0 16px 0 !important;
+    padding: 16px !important;
+    position: static !important;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
+                opacity 0.25s ease,
+                margin-bottom 0.25s ease;
+    pointer-events: none;
+  }
+
+  .filter-category-card.is-open {
+    max-height: 700px;
+    opacity: 1;
+    margin-bottom: 16px !important;
+    pointer-events: auto;
+  }
+
+  .products-filter-page > .container {
+    padding: 0 12px !important;
+    max-width: 100% !important;
+  }
+
+  /* 2-column product grid on mobile */
+  .products-filter-page .col-lg-3.col-md-6.col-12 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .products-filter-page .row {
+    margin-left: -6px !important;
+    margin-right: -6px !important;
+  }
+
+  .products-filter-page .col-md-6.text-nowrap,
+  .products-filter-page .col-md-6 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .products-filter-page .dataTables_filter {
+    text-align: left !important;
+    margin-top: 8px;
+  }
+
+  .products-filter-page nav.dataTables_paginate {
+    justify-content: center !important;
+    display: flex;
+  }
+
+  .products-filter-page .dataTables_info {
+    text-align: center;
+  }
+}
+
+/* ── Very small screens (< 480px): single column ─────────── */
+@media (max-width: 480px) {
+  .products-filter-page .col-lg-3.col-md-6.col-12 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .products-filter-page > .container {
+    padding: 0 8px !important;
+  }
+}
+
+/* ── Dark mode for mobile toggle ────────────────────────── */
+html.dark-mode .filter-mobile-toggle {
+  background: var(--apple-surface);
+  border-color: var(--apple-orange);
+  color: var(--apple-orange);
+}
+
+html.dark-mode .filter-mobile-toggle[aria-expanded="true"] {
+  background: var(--apple-orange);
+  color: #fff;
+}
+
+/* ── Trending Section → Browse All CTA ────────────────────── */
+.trending-cta-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 36px 0 12px;
+}
+
+.trending-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 32px;
+  border-radius: 980px;
+  border: 2px solid var(--apple-navy);
+  background: transparent;
+  color: var(--apple-navy) !important;
+  font-family: var(--apple-font) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+  text-decoration: none !important;
+  transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease,
+              box-shadow 0.22s ease, transform 0.18s ease;
+  box-shadow: 0 2px 10px rgba(6,40,95,0.10);
+}
+
+.trending-cta-btn svg {
+  transition: transform 0.22s ease;
+  flex-shrink: 0;
+}
+
+.trending-cta-btn:hover {
+  background: var(--apple-navy) !important;
+  color: #fff !important;
+  border-color: var(--apple-navy) !important;
+  box-shadow: 0 8px 28px rgba(6,40,95,0.20) !important;
+  transform: translateY(-1px);
+}
+
+.trending-cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* Dark mode */
+html.dark-mode .trending-cta-btn {
+  border-color: var(--apple-text-3) !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .trending-cta-btn:hover {
+  background: var(--apple-orange) !important;
+  border-color: var(--apple-orange) !important;
+  color: #fff !important;
+}

@@ -286,6 +286,17 @@
             </div>
                @livewire('product-card')
         </div>
+
+        {{-- Browse All CTA --}}
+        <div class="trending-cta-wrap">
+            <a href="{{ route('shop.index') }}" class="trending-cta-btn" id="browse-all-products">
+                Browse All Products
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                </svg>
+            </a>
+        </div>
+
     </section>
     <!-- End Trending Product Area -->
 
