@@ -91,7 +91,7 @@
                                     <li><span>4.0 Review(s)</span></li>
                                 </ul>
                                 <div class="price">
-                                    <span>${{$product->price}}</span>
+                                    <span>{{$product->price}}  {{ $store['site_currency']->payload ?? 'DA' }}</span>
                                 </div>
                             </div>
                         </div>

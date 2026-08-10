@@ -12,6 +12,10 @@ use Illuminate\Support\Str;
 use TomatoPHP\FilamentEcommerce\Models\Order;
 use TomatoPHP\FilamentEcommerce\Models\OrdersItem;
 use TomatoPHP\FilamentEcommerce\Models\Branch;
+// use App\Mail\NewOrderAdminNotification;
+// use App\Models\User;
+// use Illuminate\Support\Facades\Log;
+// use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -114,6 +118,18 @@ class CheckoutController extends Controller
 
         // Clear cart
         Cart::destroy();
+
+        // Send Email Notification to Admin
+        // try {
+        //     $adminEmail = setting('site_email')
+        //         ?: (User::first()?->email ?: config('mail.from.address'));
+
+        //     if ($adminEmail) {
+        //         Mail::to($adminEmail)->send(new NewOrderAdminNotification($order));
+        //     }
+        // } catch (\Exception $e) {
+        //     Log::error('Failed to send admin order notification email: ' . $e->getMessage());
+        // }
 
         return response()->json([
             'message' => 'Order placed successfully!',

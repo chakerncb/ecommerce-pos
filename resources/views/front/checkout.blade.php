@@ -60,8 +60,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-4">
                                                                 <div class="mb-3">
-                                                                    <label class="form-label" for="billing-name">Name</label>
-                                                                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="billing-name" placeholder="Enter name" value="{{ old('name') }}">
+                                                                    <label class="form-label" for="billing-name">Full Name / الإسم الكامل</label>
+                                                                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="billing-name" placeholder="Enter name / أدخل الإسم" value="{{ old('name') }}">
                                                                     @error('name')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-4">
+                                                            <!-- <div class="col-lg-4">
                                                                 <div class="mb-3">
                                                                     <label class="form-label" for="billing-email-address">Email Address</label>
                                                                     <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="billing-email-address" placeholder="Enter email" value="{{ old('email') }}">
@@ -79,11 +79,11 @@
                                                                         </span>
                                                                     @enderror
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="col-lg-4">
                                                                 <div class="mb-3">
-                                                                    <label class="form-label" for="billing-phone">Phone</label>
-                                                                    <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" id="billing-phone" placeholder="Enter Phone no." value="{{ old('phone') }}">
+                                                                    <label class="form-label" for="billing-phone">Phone Number / رقم الهاتف</label>
+                                                                    <input name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" id="billing-phone" placeholder="Enter Phone no. / أدخل رقم الهاتف" value="{{ old('phone') }}">
                                                                     @error('phone')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>{{ $message }}</strong>
@@ -94,8 +94,8 @@
                                                         </div>
         
                                                         <div class="mb-3">
-                                                            <label class="form-label" for="billing-address">Address</label>
-                                                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" id="billing-address" rows="3" placeholder="Enter full address">{{ old('address') }}</textarea>
+                                                            <label class="form-label" for="billing-address">Address / العنوان</label>
+                                                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" id="billing-address" rows="3" placeholder="Enter full address / أدخل العنوان">{{ old('address') }}</textarea>
                                                             @error('address')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -103,8 +103,9 @@
                                                             @enderror
                                                         </div>
         
-                                                        @livewire('shipping-info')
+                                                      <!-- livewire('shipping-info') -->
                                                     </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -127,7 +128,7 @@
                                                                 <input type="radio" name="chip_method" value="home" class="card-radio-input" checked="">
                                                                 <div class="card-radio text-truncate p-3">
                                                                     <div class="card-radio text-truncate p-3 text-center">
-                                                                        <span class="fs-14 mb-4 d-block">Home</span>
+                                                                        <span class="fs-14 mb-4 d-block">Home / المنزل</span>
                                                                         <img src="{{URL::asset('assets/images/icon/home-delivery.png')}}" alt="" class="mx-auto d-block">
                                                                     </div>
                                                                 </div>
@@ -146,7 +147,7 @@
                                                                 <input type="radio" name="chip_method" value="agency" class="card-radio-input">
                                                                 <div class="card-radio text-truncate p-3 text-center">
                                                                     <div class="card-radio text-truncate p-3 text-center">
-                                                                        <span class="fs-14 mb-4 d-block">Post Office</span>
+                                                                        <span class="fs-14 mb-4 d-block">Post Office / مكتب البريد</span>
                                                                         <img src="{{URL::asset('assets/images/icon/post-office.png')}}" alt="" class="mx-auto d-block">
                                                                     </div>
                                                                 </div>
@@ -163,7 +164,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="checkout-item">
+                                <!-- <li class="checkout-item">
                                     <div class="avatar checkout-icon p-1">
                                         <div class="avatar-title rounded-circle bg-primary">
                                             <i class="bx bxs-wallet-alt text-white font-size-20"></i>
@@ -192,7 +193,7 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 
                                                 <!-- <div class="col-lg-3 col-sm-6">
                                                     <div>
@@ -211,7 +212,7 @@
                                                     </div>
                                                 </div> -->
         
-                                                <div class="col-lg-3 col-sm-6">
+                                                <!-- <div class="col-lg-3 col-sm-6">
                                                     <div>
                                                         <label class="card-radio-label">
                                                             <input type="radio" name="pay_method" value="cash" class="card-radio-input" checked="">
@@ -227,12 +228,12 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 
-                                            </div>
+                                            <!-- </div>
                                         </div>
                                     </div>
-                                </li>
+                                </li> -->
                             </ol>
                         </div>
                     </div>
@@ -240,13 +241,13 @@
                     <div class="row my-4">
                         <div class="col">
                             <a href="{{route('index')}}" class="btn btn-link text-muted">
-                                <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping </a>
+                                <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping /  متابعة التسوق </a>
                         </div> <!-- end col -->
                         <div class="col">
                             <div class="text-end mt-2 mt-sm-0">
-                                <a id="Procced" class="btn btn-success">
-                                    <i class="mdi mdi-cart-outline me-1"></i> Procced 
-                                </a>
+                                <button type="submit" id="Procced" class="btn btn-success">
+                                    <i class="mdi mdi-cart-outline me-1"></i> Procced to Confirming / تاكيد الطلب
+                                </button>
                             </div>
                         </div> <!-- end col -->
                     </div> <!-- end row-->
@@ -270,7 +271,7 @@
                                     <tbody>
                                         @foreach ($cartItems as $item )
                                         <tr>
-                                            <th scope="row"><img src="{{URL::asset('assets/src/images/product/'.$item->options->path)}}" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
+                                            <th scope="row"><img src="{{ ($item->options->path && filter_var($item->options->path, FILTER_VALIDATE_URL)) ? $item->options->path : URL::asset('assets/src/images/product/no-image.png') }}" alt="{{ $item->name }}" title="{{ $item->name }}" class="avatar-lg rounded"></th>
                                             <td>
                                                 <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">{{$item->name}}</a></h5>
                                                 <p class="text-muted mb-0">
@@ -280,9 +281,9 @@
                                                     <i class="bx bxs-star text-warning"></i>
                                                     <i class="bx bxs-star-half text-warning"></i>
                                                 </p>
-                                                <p class="text-muted mb-0 mt-1">{{$item->price}} x {{$item->qty}}</p>
+                                                <p class="text-muted mb-0 mt-1">{{$item->price}} {{ $store['site_currency']->payload ?? 'DA' }} x {{$item->qty}}</p>
                                             </td>
-                                            <td>{{$item->subtotal}}</td>
+                                            <td>{{$item->subtotal}} {{ $store['site_currency']->payload ?? 'DA' }}</td>
                                         </tr>
                                         @endforeach
 
@@ -305,7 +306,7 @@
                                                 <h5 class="font-size-14 m-0">Sub Total :</h5>
                                             </td>
                                             <td>
-                                                {{$Cart->subtotal}}
+                                                {{$Cart->subtotal}} {{ $store['site_currency']->payload ?? 'DA' }}
                                             </td>
                                         </tr>
                                         <tr>
@@ -313,7 +314,7 @@
                                                 <h5 class="font-size-14 m-0">Discount :</h5>
                                             </td>
                                             <td>
-                                                {{$Cart->discount}}
+                                                {{$Cart->discount}} {{ $store['site_currency']->payload ?? 'DA' }}
                                             </td>
                                         </tr>
         
@@ -330,7 +331,7 @@
                                                 <h5 class="font-size-14 m-0">Estimated Tax :</h5>
                                             </td>
                                             <td>
-                                                {{$Cart->tax}}
+                                                {{$Cart->tax}} {{ $store['site_currency']->payload ?? 'DA' }}
                                             </td>
                                         </tr>                              
                                             
@@ -339,7 +340,7 @@
                                                 <h5 class="font-size-14 m-0">Total:</h5>
                                             </td>
                                             <td>
-                                                {{$Cart->total}}
+                                                {{$Cart->total}} {{ $store['site_currency']->payload ?? 'DA' }}
                                             </td>
                                         </tr>
                                     </tbody>

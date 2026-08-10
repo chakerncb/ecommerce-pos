@@ -58,7 +58,7 @@
                 <span class="apple-result-name">{{ $result->name }}</span>
                 <span class="apple-result-meta">
                     <span class="apple-result-category">{{ $result->category_name }}</span>
-                    <span class="apple-result-price">{{ $result->price }} DA</span>
+                    <span class="apple-result-price">{{ $result->price }} {{ $store['site_currency']->payload ?? 'DA' }}</span>
                 </span>
             </a>
             @endforeach

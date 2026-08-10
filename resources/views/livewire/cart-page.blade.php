@@ -25,7 +25,7 @@
                         <div class="col">
                             <a wire:click="decrement('{{$item->rowId}}')">-</a><a class="border">{{$item->qty}}</a><a wire:click="increment('{{$item->rowId}}')">+</a>
                         </div>
-                        <div class="col">{{$item->price}} DA<span wire:click="removefromCart({{$item->id}})" class="close">&#10005;</span></div>
+                        <div class="col">{{$item->price}} {{ $store['site_currency']->payload ?? 'DA' }}<span wire:click="removefromCart({{$item->id}})" class="close">&#10005;</span></div>
                     </div>
                 </div>
             @endforeach
@@ -35,7 +35,7 @@
             <hr>
             <div class="row">
                 <div class="col" style="padding-left:0;">{{$cartCount}} Items</div>
-                <div class="col text-right">{{$cartTotal}} DA</div>
+                <div class="col text-right">{{$cartTotal}} {{ $store['site_currency']->payload ?? 'DA' }}</div>
             </div>
             <form>
                 <p>SHIPPING</p>
@@ -44,7 +44,7 @@
             </form>
             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                 <div class="col">TOTAL PRICE</div>
-                <div class="col text-right">{{$cartTotal}} DA</div>
+                <div class="col text-right">{{$cartTotal}} {{ $store['site_currency']->payload ?? 'DA' }}</div>
             </div>
             <a href="{{route('checkout.index')}}" class="btn">CHECKOUT</a>
         </div>

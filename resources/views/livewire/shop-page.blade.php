@@ -41,9 +41,9 @@
             </div>
             <input type="range" class="form-range" min="{{$minPrice}}" max="{{$maxPrice}}" step="100" id="customRange3" wire:model="selectedPrice" wire:change="filter">    
             <div class="price-range">
-                <span>{{$minPrice}} Da</span>
+                <span>{{$minPrice}} {{ $store['site_currency']->payload ?? 'DA' }}</span>
                 <br>
-                <span>{{$selectedPrice}} Da</span>
+                <span>{{$selectedPrice}} {{ $store['site_currency']->payload ?? 'DA' }}</span>
             </div>     
         </div>
         
@@ -93,7 +93,7 @@
                                     <li><span>4.0 Review(s)</span></li>
                                 </ul>
                                 <div class="price">
-                                    <span>{{$product->price}} Da</span>
+                                    <span>{{$product->price}} {{ $store['site_currency']->payload ?? 'DA' }}</span>
                                 </div>
                             </div>
                         </div>

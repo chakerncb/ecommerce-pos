@@ -61,47 +61,13 @@
                                     cameras</a></p>
                             @if ($product->discount != 0)
                                 <h3 class="price">
-                                    <span style="color: red; text-decoration: line-through;">{{$product->price}} DA</span>
-                                    {{$product->price - ($product->price * $product->discount / 100)}} DA
+                                    <span style="color: red; text-decoration: line-through;">{{$product->price}} {{ $store['site_currency']->payload ?? 'DA' }}</span>
+                                    {{$product->price - ($product->price * $product->discount / 100)}} {{ $store['site_currency']->payload ?? 'DA' }}
                                 </h3>
                             @else 
-                                <h3 class="price">{{$product->price}} DA</h3>
+                                <h3 class="price">{{$product->price}} {{ $store['site_currency']->payload ?? 'DA' }}</h3>
                             @endif
                             <p class="info-text">{{$product->description}}.</p>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group color-option">
-                                        <label class="title-label" for="size">in Stock :</label>
-                                        {{-- <div class="single-checkbox checkbox-style-1">
-                                            <input type="checkbox" id="checkbox-1" checked>
-                                            <label for="checkbox-1"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-2">
-                                            <input type="checkbox" id="checkbox-2">
-                                            <label for="checkbox-2"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-3">
-                                            <input type="checkbox" id="checkbox-3">
-                                            <label for="checkbox-3"><span></span></label>
-                                        </div>
-                                        <div class="single-checkbox checkbox-style-4">
-                                            <input type="checkbox" id="checkbox-4">
-                                            <label for="checkbox-4"><span></span></label>
-                                        </div> --}}
-                                        <p style="font-size: 24px;">{{$product->stock}}</p>
-                                    </div>
-                                </div>
-                                <!-- <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group">
-                                        <label for="color">Battery capacity</label>
-                                        <select class="form-control" id="color">
-                                            <option>5100 mAh</option>
-                                            <option>6200 mAh</option>
-                                            <option>8000 mAh</option>
-                                        </select>
-                                    </div>
-                                </div> -->
-                            </div>
                             <div class="bottom-content">
                                 @livewire('product-details-card', ['product' => $product])
                             </div>

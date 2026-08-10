@@ -13,7 +13,7 @@
                                 @foreach ($categories as $category )
                                 <li><a href="{{route('category.index', $category->name)}}">{{$category->name}}</a></li>
                                 @endforeach
-                                {{-- <li><a href="product-grids.html">Electronics <i class="lni lni-chevron-right"></i></a>
+                                <!-- {{-- <li><a href="product-grids.html">Electronics <i class="lni lni-chevron-right"></i></a>
                                     <ul class="inner-sub-category">
                                         <li><a href="product-grids.html">Digital Cameras</a></li>
                                         <li><a href="product-grids.html">Camcorders</a></li>
@@ -38,7 +38,7 @@
                                 <li><a href="product-grids.html">Computers & Tablets </a></li>
                                 <li><a href="product-grids.html">Video Games </a></li>
                                 <li><a href="product-grids.html">Home Appliances </a></li>
-                                 --}}
+                                 --}} -->
                             </ul>
                         </div>
                         <!-- End Mega Category Menu -->
@@ -66,7 +66,7 @@
                                             @endforeach
                                         </ul>
                                     </li>
-                                    {{-- <li class="nav-item">
+                                    <!-- {{-- <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
                                             data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
                                             aria-expanded="false" aria-label="Toggle navigation">Shop</a>
@@ -89,7 +89,7 @@
                                             <li class="nav-item"><a href="blog-single-sidebar.html">Blog Single
                                                     Sibebar</a></li>
                                         </ul>
-                                    </li> --}}
+                                    </li> --}} -->
                                     <li class="nav-item">
                                         <a href="{{route('shop.index')}}" aria-label="Toggle navigation">Shop</a>
                                     </li>
@@ -111,17 +111,17 @@
                         <h5 class="title">Follow Us:</h5>
                         <ul>
                             <li class="mt-2">
-                                <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61575759597035"><i class="lni lni-facebook-filled"></i></a>
                             </li>
-                            <li class="mt-2">
+                            <!-- <li class="mt-2">
                                 <a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
-                            </li>
+                            </li> -->
                             <li class="mt-2">
                                 <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
                             </li>
-                            <li class="mt-2">
+                            <!-- <li class="mt-2">
                                 <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -135,8 +135,8 @@
     <!-- Start Hero Area -->
     <section class="hero-area">
         <div class="container pubs-container">
-            {{-- <div class="row slider-row"> --}}
-                {{-- <div class="col-lg-8 col-12 custom-padding-right"> --}} 
+            <!-- {{-- <div class="row slider-row"> --}}
+                {{-- <div class="col-lg-8 col-12 custom-padding-right"> --}}  -->
                     <div class="slider-head">
                         <!-- Start Hero Slider -->
                         <div class="hero-slider">
@@ -161,72 +161,50 @@
                                 @foreach ($trendingProducts as $product)
                                     @php
                                         $hasImg = !empty($product->feature_image);
-                                        $productName = e($product->name);
-                                        $encodedName = urlencode(substr($product->name, 0, 2));
+                                        $currentPrice = $product->price;
+                                        $discount = $product->discount ?? 0;
+                                        $originalPrice = $discount > 0 ? round($currentPrice / (1 - $discount / 100), 2) : null;
+                                        $categoryLabel = $product->category->name ?? strtoupper(substr($product->name, 0, 8));
                                     @endphp
                                     <!-- Start Product Slide -->
                                     <div class="single-slider single-slider--product">
-                                        {{-- SVG wave background decoration --}}
-                                        <svg class="hero-svg-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 650" preserveAspectRatio="none" aria-hidden="true">
-                                            <path d="M0,200 C360,320 720,80 1440,250 L1440,650 L0,650 Z" fill="rgba(6,40,95,0.07)"/>
-                                            <path d="M0,350 C400,200 900,450 1440,300 L1440,650 L0,650 Z" fill="rgba(254,133,23,0.05)"/>
-                                        </svg>
 
-                                        <div class="hero-product-inner">
-                                            {{-- Left: text content --}}
-                                            <div class="hero-product-copy">
-                                                <span class="hero-eyebrow">Trending Now</span>
-                                                <h2 class="hero-title">{{ $product->name }}</h2>
-                                                <p class="hero-desc">{{ Str::limit(strip_tags($product->about ?? $product->description ?? 'Check out our top trending product with best deals.'), 120) }}</p>
-                                                <div class="hero-price">
-                                                    <span class="hero-price__label">Now Only</span>
-                                                    <strong class="hero-price__amount">{{ number_format($product->price, 2) }} <em>DA</em></strong>
+                                        <div class="tp-banner">
+                                            {{-- Left: copy --}}
+                                            <div class="tp-copy">
+                                                <span class="tp-eyebrow">Trending now</span>
+                                                <h2 class="tp-title">{{ $product->name }}</h2>
+                                                <div class="tp-price-row">
+                                                    @if($originalPrice)
+                                                        <span class="tp-price-old">{{ number_format($originalPrice, 2) }} {{ $store['site_currency']->payload ?? 'DA' }}</span>
+                                                    @endif
+                                                    <span class="tp-price-new">{{ number_format($currentPrice, 2) }}<sup>{{ $store['site_currency']->payload ?? 'DA' }}</sup></span>
                                                 </div>
-                                                <div class="button">
-                                                    <a href="{{ route('product.details', $product->name) }}" class="btn btn-hero">Shop Now</a>
-                                                </div>
+                                                <a href="{{ route('product.details', $product->name) }}" class="tp-cta">
+                                                    Shop now
+                                                    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </a>
                                             </div>
 
-                                            {{-- Right: product visual --}}
-                                            <div class="hero-product-visual">
-                                                @if($hasImg)
-                                                    <div class="hero-product-img-wrap">
-                                                        <img src="{{ $product->feature_image }}" alt="{{ $product->name }}" class="hero-product-img">
-                                                    </div>
-                                                @else
-                                                    {{-- SVG placeholder that feels designed, not broken --}}
-                                                    <svg class="hero-product-placeholder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340" aria-label="{{ $product->name }} product illustration">
-                                                        <defs>
-                                                            <radialGradient id="bg{{ $loop->index }}" cx="50%" cy="50%" r="50%">
-                                                                <stop offset="0%" stop-color="#fe8517" stop-opacity="0.18"/>
-                                                                <stop offset="100%" stop-color="#06285f" stop-opacity="0.08"/>
-                                                            </radialGradient>
-                                                            <linearGradient id="box{{ $loop->index }}" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                                <stop offset="0%" stop-color="#fe8517"/>
-                                                                <stop offset="100%" stop-color="#e06000"/>
-                                                            </linearGradient>
-                                                        </defs>
-                                                        {{-- soft glow circle --}}
-                                                        <circle cx="170" cy="170" r="150" fill="url(#bg{{ $loop->index }})"/>
-                                                        {{-- abstract product box --}}
-                                                        <rect x="100" y="130" width="140" height="120" rx="12" fill="url(#box{{ $loop->index }})" opacity="0.92"/>
-                                                        <rect x="115" y="115" width="110" height="30" rx="6" fill="#06285f" opacity="0.85"/>
-                                                        {{-- shine --}}
-                                                        <rect x="110" y="140" width="40" height="100" rx="8" fill="white" opacity="0.08"/>
-                                                        {{-- label area --}}
-                                                        <rect x="120" y="175" width="100" height="8" rx="4" fill="white" opacity="0.4"/>
-                                                        <rect x="130" y="192" width="80" height="6" rx="3" fill="white" opacity="0.25"/>
-                                                        {{-- initials --}}
-                                                        <text x="170" y="235" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="700" fill="white" opacity="0.9">{{ strtoupper(substr($product->name, 0, 2)) }}</text>
-                                                        {{-- decorative dots --}}
-                                                        <circle cx="80" cy="90" r="8" fill="#fe8517" opacity="0.3"/>
-                                                        <circle cx="270" cy="260" r="12" fill="#06285f" opacity="0.15"/>
-                                                        <circle cx="60" cy="240" r="5" fill="#fe8517" opacity="0.2"/>
-                                                        <circle cx="290" cy="100" r="6" fill="#06285f" opacity="0.12"/>
-                                                    </svg>
-                                                @endif
+                                            {{-- Right: hang tag --}}
+                                            <div class="tp-tag-wrap">
+                                                <div class="tp-perforation"></div>
+                                                <div class="tp-tag">
+                                                    @if($hasImg)
+                                                        <img src="{{ $product->feature_image }}" alt="{{ $product->name }}">
+                                                    @else
+                                                        {{-- Placeholder with product initials --}}
+                                                        <div class="tp-tag-placeholder">
+                                                            <span>{{ strtoupper(substr($product->name, 0, 2)) }}</span>
+                                                        </div>
+                                                    @endif
+                                                    <div class="tp-tag-label">{{ $categoryLabel }}</div>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <!-- End Product Slide -->
                                 @endforeach
@@ -235,11 +213,10 @@
                         </div>
                         <!-- End Hero Slider -->
                     </div>
-                {{-- </div> --}}
+                <!-- {{-- </div> --}}
                 {{-- <div class="col-lg-4 col-12"> --}}
                     {{-- <div class="row"> --}}
                         {{-- <div class="col-lg-12 col-md-6 col-12 md-custom-padding"> --}}
-                            <!-- Start Small Banner -->
                             {{-- <div class="hero-small-banner"
                                 style="background-image: URL({{URL::asset('assets/images/hero/slider-bnr.jpg')}});">
                                 <div class="content">
@@ -249,12 +226,12 @@
                                     </h2>
                                     <h3>$259.99</h3>
                                 </div>
-                            </div> --}}
+                            </div> --}} -->
                             <!-- End Small Banner -->
-                        {{-- </div> --}}
-                        {{-- <div class="col-lg-12 col-md-6 col-12"> --}}
+                        <!-- {{-- </div> --}}
+                        {{-- <div class="col-lg-12 col-md-6 col-12"> --}} -->
                             <!-- Start Small Banner -->
-                            {{-- <div class="hero-small-banner style2">
+                            <!-- {{-- <div class="hero-small-banner style2">
                                 <div class="content">
                                     <h2>Weekly Sale!</h2>
                                     <p>Saving up to 50% off all online store items this week.</p>
@@ -262,12 +239,12 @@
                                         <a class="btn" href="product-grids.html">Shop Now</a>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div> --}} -->
                             <!-- Start Small Banner -->
-                        {{-- </div> --}}
+                        <!-- {{-- </div> --}}
                     {{-- </div> --}}
                 {{-- </div> --}}
-            {{-- </div> --}}
+            {{-- </div> --}} -->
         </div>
     </section>
     <!-- End Hero Area -->
@@ -287,7 +264,7 @@
                @livewire('product-card')
         </div>
 
-        {{-- Browse All CTA --}}
+        <!-- {{-- Browse All CTA --}} -->
         <div class="trending-cta-wrap">
             <a href="{{ route('shop.index') }}" class="trending-cta-btn" id="browse-all-products">
                 Browse All Products
@@ -300,8 +277,8 @@
     </section>
     <!-- End Trending Product Area -->
 
-    {{-- <!-- Start Call Action Area -->
-    <section class="call-action section">
+    <!--  Start Call Action Area -->
+    <!-- <section class="call-action section">
         <div class="container">
             <div class="row ">
                 <div class="col-lg-8 offset-lg-2 col-12">
@@ -319,8 +296,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!-- End Call Action Area --> --}}
+    </section> -->
+    <!-- End Call Action Area --> 
 
     <!-- Start Banner Area -->
     <!-- <section class="banner section">
@@ -366,7 +343,7 @@
                     </div>
                     <div class="media-body">
                         <h5>Free Shipping</h5>
-                        <span>On order over 1000 Dinar</span>
+                        <span>On order over 1000 {{ $store['site_currency']->payload ?? 'DZD' }}</span>
                     </div>
                 </li>
                 <!-- Money Return -->

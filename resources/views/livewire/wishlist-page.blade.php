@@ -29,7 +29,7 @@
                             {{-- <div class="col">
                                 <a wire:click="decrement('{{$item->id}}')">-</a><a class="border">{{$item->qty}}</a><a wire:click="increment('{{$item->id}}')">+</a>
                             </div> --}}
-                            <div class="col">{{$item->price}} DZD
+                            <div class="col">{{$item->price}} {{ $store['site_currency']->payload ?? 'DZD' }}
                                 <span wire:click="removeFromWishlist({{$item->product_id}})" class="close">&#10005;</span>
                             </div>
 

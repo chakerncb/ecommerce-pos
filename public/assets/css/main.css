@@ -2810,7 +2810,7 @@ top: -1px;
   width: 19px;
   line-height: 19px;
   background-color: #06285f;
-  color: #fff;
+  color: #fff !important;
   font-size: 12px;
   font-weight: 500;
   text-align: center;
@@ -2834,7 +2834,7 @@ top: -1px;
   display: inline-block;
   border-radius: 50%;
   border: 1px solid #eee;
-  color: #555;
+  color: #555 !important;
   font-size: 18px;
   text-align: center;
   position: relative;
@@ -2848,7 +2848,7 @@ top: -1px;
   width: 19px;
   line-height: 19px;
   background-color: #06285f;
-  color: #fff;
+  color: #F2994A !important;
   font-size: 12px;
   font-weight: 500;
   text-align: center;
@@ -4244,9 +4244,272 @@ top: 2px;
   }
 }
 
-/* ── Product slide (split layout) ───────────────── */
+/* ── Product slide (tag-card design) ───────────────── */
 .single-slider--product {
-  background: linear-gradient(135deg, #f7f9ff 0%, #eef2fb 100%);
+  background: #14213D;
+  background-image:
+    radial-gradient(circle at 8% 20%, rgba(242,153,74,0.10), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(44,177,163,0.12), transparent 45%);
+}
+
+/* ══ Tag-card banner layout ═══════════════════════════════ */
+/* Load fonts for the tag-card banner */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+.tp-banner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: stretch;
+  height: 100%;
+}
+
+/* ── Left copy ── */
+.tp-copy {
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  color: #FBF7F0;
+}
+
+.tp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F2994A !important;
+  background: white;
+  padding: 6px 12px 6px 10px;
+  border-radius: 2px 8px 8px 2px;
+  border: solid 2px #F2994A;
+  margin-bottom: 0;
+  background-image: none;
+}
+
+.tp-eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #14213D;
+  display: inline-block;
+}
+
+.tp-title {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(26px, 3.5vw, 42px) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
+}
+
+.tp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.tp-price-old {
+  color: rgba(251,247,240,0.45);
+  text-decoration: line-through;
+  font-size: 15px;
+}
+
+.tp-price-new {
+  color: #F2994A !important;
+  font-size: 28px;
+  font-weight: bold !important;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.tp-price-new sup {
+  font-size: 13px;
+  margin-left: 2px;
+  color: rgba(44,177,163,0.8);
+}
+
+.tp-cta {
+  align-self: center;
+  margin-top: 8px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #14213D;
+  background: #FBF7F0;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+}
+
+.tp-cta svg {
+  width: 14px;
+  height: 14px;
+  transition: transform .15s ease;
+}
+
+.tp-cta:hover {
+  background: #F2994A;
+  color: #FBF7F0;
+  transform: translateY(-1px);
+}
+
+.tp-cta:hover svg {
+  transform: translateX(3px);
+}
+
+/* ── Right tag wrap ── */
+.tp-tag-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 40px 28px 8px;
+}
+
+.tp-perforation {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-image: linear-gradient(rgba(251,247,240,0.25) 60%, transparent 0%);
+  background-size: 1px 14px;
+  background-repeat: repeat-y;
+}
+
+.tp-tag {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  background: #FBF7F0;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 20px 40px -14px rgba(0,0,0,0.5);
+  transform: rotate(2.5deg);
+}
+
+.tp-tag::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 26px;
+  background: #14213D;
+  border-radius: 50%;
+  border: 5px solid #0d1730;
+}
+
+.tp-tag img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #e9e4d8;
+}
+
+.tp-tag-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1D2C52, #06285f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tp-tag-placeholder span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  color: rgba(251,247,240,0.7);
+  letter-spacing: -0.02em;
+}
+
+.tp-tag-label {
+  margin-top: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  background: #F2994A;
+  color: #FBF7F0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* ── Responsive ── */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .tp-banner {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+  .tp-copy {
+    padding: 32px 28px;
+    gap: 12px;
+  }
+  .tp-title {
+    font-size: 26px;
+  }
+  .tp-price-new {
+    font-size: 22px;
+  }
+  .tp-tag {
+    max-width: 200px;
+  }
+  .tp-tag-wrap {
+    padding: 20px 24px 20px 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .tp-banner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  .tp-copy {
+    padding: 28px 24px 12px;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+  }
+  .tp-eyebrow {
+    align-self: center;
+  }
+  .tp-cta {
+    align-self: center;
+  }
+  .tp-tag-wrap {
+    padding: 0 28px 28px;
+    justify-content: center;
+  }
+  .tp-perforation {
+    display: none;
+  }
+  .tp-tag {
+    transform: rotate(0deg);
+    max-width: 200px;
+    margin: 0 auto;
+  }
 }
 
 /* flex container that fills the slide */

@@ -16,12 +16,12 @@ class OrderRequest extends FormRequest
         return [
             'name'        => ['required', 'string', 'max:255'],
             'phone'       => ['required', 'string', 'max:50'],
-            'email'       => ['nullable', 'email', 'max:255'],
+            // 'email'       => ['nullable', 'email', 'max:255'],
             'address'     => ['required', 'string'],
-            'wilaya'      => ['nullable', 'string', 'max:100'],
-            'municipality'=> ['nullable', 'string', 'max:100'],
+            // 'wilaya'      => ['nullable', 'string', 'max:100'],
+            // 'municipality'=> ['nullable', 'string', 'max:100'],
             'chip_method' => ['required', 'string', 'in:home,agency'],
-            'pay_method'  => ['required', 'string', 'in:card,paypal,cash'],
+            // 'pay_method'  => ['required', 'string', 'in:card,paypal,cash'],
         ];
     }
 }

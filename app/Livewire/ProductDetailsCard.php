@@ -29,6 +29,23 @@ class ProductDetailsCard extends Component
         }
     }
 
+    public function incrementQuantity($product_id)
+    {
+        if (isset($this->quantity[$product_id])) {
+            $max = $this->product->stock ?? 99;
+            if ($this->quantity[$product_id] < $max) {
+                $this->quantity[$product_id]++;
+            }
+        }
+    }
+
+    public function decrementQuantity($product_id)
+    {
+        if (isset($this->quantity[$product_id]) && $this->quantity[$product_id] > 1) {
+            $this->quantity[$product_id]--;
+        }
+    }
+
     public function render()
     {
         return view('livewire.product-details-card', ['product' => $this->product]);

@@ -28,9 +28,13 @@ class AppServiceProvider extends ServiceProvider
             TomatoProduct::class => Product::class,
         ]);
 
-        View::composer('front.*', function ($view) {
-            $store = Setting::where('group', 'sites')->get()->keyBy('name');
-            $view->with('store', $store);
+        View::composer('*', function ($view) {
+            try {
+                $store = \App\Traits\StoreInfoTrait::getStoreInfo();
+                $view->with('store', $store);
+            } catch (\Throwable $e) {
+                // Ignore during migrations or when database is not yet set up
+            }
         });
     }
 }

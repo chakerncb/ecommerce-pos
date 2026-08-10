@@ -225,8 +225,8 @@
         </div>
         <!-- End Footer Top -->
         <!-- Start Footer Middle -->
-<!--        
-        <div class="footer-middle">
+       
+        <!-- <div class="footer-middle">
             <div class="container">
                 <div class="bottom-inner">
                     <div class="row">
@@ -237,8 +237,8 @@
                                     <p class="phone">Phone: {{ $store['site_phone']->payload }}</p>
                                 @endif
                                 <ul>
-                                    <li><span>Monday-Friday: </span> 9.00 am - 8.00 pm</li>
-                                    <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
+                                    <li><span>Saturday-Thursday: </span> 07:00 - 23:00</li>
+                                    <li><span>Friday: </span> 08:00 - 23:00</li>
                                 </ul>
                                 @if(!empty($store['site_email']->payload ?? null))
                                     <p class="mail">
@@ -306,7 +306,7 @@
                         <div class="col-lg-4 col-12">
                             <div class="payment-gateway">
                                 <span>We Accept:</span>
-                                <img src="assets/images/footer/credit-cards-footer.png" alt="#">
+                                <img src="{{URL::asset('assets/images/footer/credit-cards-footer.png')}}" alt="#">
                             </div>
                         </div>
                         <div class="col-lg-4 col-12">
@@ -320,10 +320,10 @@
                                 <li>
                                     <span>Follow Us On:</span>
                                 </li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="https://www.facebook.com/profile.php?id=61575759597035"><i class="lni lni-facebook-filled"></i></a></li>
+                                <!-- <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li> -->
                                 <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li>
+                                <!-- <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li> -->
                             </ul>
                         </div>
                     </div>

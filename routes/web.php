@@ -12,10 +12,7 @@ use App\Http\Controllers\Front\CategoryController;
 use App\Http\Controllers\Front\SearchController;
 use Illuminate\Support\Facades\Auth;
 
-Route::group([
-    'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-], function () {
+Route::group([], function () {
 
     Livewire::setUpdateRoute(function ($handle) {
         return Route::post('/livewire/update', $handle);
@@ -33,7 +30,9 @@ Route::group([
     Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::post('checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::middleware(['throttle:5,1'])->group(function () {
+        Route::post('checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    });
     // Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
     Route::get('invoice/{id}', [CheckoutController::class, 'invoice'])->name('invoice');
 

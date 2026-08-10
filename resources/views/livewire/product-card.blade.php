@@ -16,7 +16,7 @@
             <div class="product-image">
                 <img src="{{ $product->feature_image }}" alt="{{ $product->name }}" />
                 <button wire:click.stop="ToCart({{$product->product_id}})" class="btn-atc-icon" title="Add to Cart">
-<i class="bi bi-cart-plus"></i>
+                   <i class="bi bi-cart-plus"></i>
                 </button>
             </div>
             <div class="product-info">
@@ -33,7 +33,7 @@
                     <li><span>4.0 Review(s)</span></li>
                 </ul>
                 <div class="price">
-                    <span>{{$product->price}} DA</span>
+                    <span>{{$product->price}} {{ $store['site_currency']->payload }}</span>
                 </div>
             </div>
         </div>
