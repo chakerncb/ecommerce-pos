@@ -44,45 +44,66 @@ Author: GrayGrids
 
 })();
 
-//===== Dark Mode Functions
+//===== Dark Mode Functions (Apple Standard)
+function updateThemeIcon() {
+    const isDark = document.documentElement.classList.contains('dark-mode');
+    const icon = document.getElementById('theme-toggle-icon');
+    const btn = document.getElementById('theme-toggle-btn');
+    
+    if (icon) {
+        if (isDark) {
+            icon.className = 'bi bi-sun-fill';
+            if (btn) {
+                btn.setAttribute('title', 'Switch to Light Mode');
+                btn.setAttribute('aria-label', 'Switch to Light Mode');
+            }
+        } else {
+            icon.className = 'bi bi-moon-stars-fill';
+            if (btn) {
+                btn.setAttribute('title', 'Switch to Dark Mode');
+                btn.setAttribute('aria-label', 'Switch to Dark Mode');
+            }
+        }
+    }
+
+    const darkBtns = document.querySelectorAll('.dark-btn');
+    const lightBtns = document.querySelectorAll('.light-btn');
+    darkBtns.forEach(b => b.style.border = isDark ? '2px solid #fe8517' : 'none');
+    lightBtns.forEach(b => b.style.border = isDark ? 'none' : '2px solid #fe8517');
+}
+
 function setDarkMode() {
     document.documentElement.classList.add('dark-mode');
     localStorage.setItem('theme', 'dark');
-    updateThemeButtons();
+    updateThemeIcon();
 }
 
 function setLightMode() {
     document.documentElement.classList.remove('dark-mode');
     localStorage.setItem('theme', 'light');
-    updateThemeButtons();
+    updateThemeIcon();
 }
 
-function updateThemeButtons() {
-    const isDark = document.documentElement.classList.contains('dark-mode');
-    const darkBtns = document.querySelectorAll('.dark-btn');
-    const lightBtns = document.querySelectorAll('.light-btn');
-    
-    darkBtns.forEach(btn => {
-        btn.style.border = isDark ? '2px solid #0167F3' : 'none';
-    });
-    
-    lightBtns.forEach(btn => {
-        btn.style.border = isDark ? 'none' : '2px solid #0167F3';
-    });
+function toggleTheme() {
+    if (document.documentElement.classList.contains('dark-mode')) {
+        setLightMode();
+    } else {
+        setDarkMode();
+    }
 }
 
 // Initialize theme on page load
 (function initTheme() {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark-mode');
     } else if (savedTheme === 'light') {
         document.documentElement.classList.remove('dark-mode');
     }
-    // Update button styles after DOM is loaded
+    
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', updateThemeButtons);
+        document.addEventListener('DOMContentLoaded', updateThemeIcon);
     } else {
-        updateThemeButtons();
+        updateThemeIcon();
     }
 })();

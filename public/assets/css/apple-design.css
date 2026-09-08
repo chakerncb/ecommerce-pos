@@ -59,6 +59,65 @@ p, span, label, li {
   padding: 0.6rem 0 !important;
 }
 
+/* Cart & Theme Toggle Buttons in Navbar */
+.header .navbar-cart {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 4px !important;
+}
+
+.header .navbar-cart .theme-toggle-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.header .navbar-cart .theme-toggle-btn,
+.header .navbar-cart .cart-items .main-btn {
+  width: 40px !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--apple-border) !important;
+  background: var(--apple-surface) !important;
+  color: var(--apple-text-1) !important;
+  font-size: 17px !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: var(--apple-shadow-sm) !important;
+  padding: 0 !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+.header .navbar-cart .theme-toggle-btn:hover,
+.header .navbar-cart .cart-items:hover .main-btn,
+.header .navbar-cart .cart-items .main-btn:hover {
+  background: var(--apple-bg) !important;
+  color: var(--apple-orange) !important;
+  border-color: var(--apple-orange) !important;
+  transform: scale(1.06) !important;
+}
+
+.header .navbar-cart .cart-items .main-btn .total-items {
+  position: absolute !important;
+  right: -6px !important;
+  top: -5px !important;
+  height: 19px !important;
+  width: 19px !important;
+  line-height: 19px !important;
+  background-color: var(--apple-orange) !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px rgba(254, 133, 23, 0.4) !important;
+}
+
 /* Hotline text */
 .nav-hotline h3 {
   font-size: 13px !important;
@@ -1730,56 +1789,212 @@ section.checkout {
   border: none !important;
 }
 
-/* ── Dark mode tokens update ───────────────────────────── */
+/* ════════════════════════════════════════════════════════
+   APPLE STANDARD DARK MODE DESIGN SYSTEM
+   ════════════════════════════════════════════════════════ */
+
 html.dark-mode {
-  --apple-bg:      #1c1c1e;
-  --apple-surface: #2c2c2e;
-  --apple-text-1:  #f5f5f7;
-  --apple-text-2:  #aeaeb2;
-  --apple-text-3:  #636366;
-  --apple-border:  rgba(255,255,255,0.1);
+  --apple-bg:               #121214;               /* Apple System Dark Base */
+  --apple-surface:          #1c1c1e;               /* Apple System Dark Secondary Surface */
+  --apple-surface-elevated: #2c2c2e;               /* Apple System Dark Card / Modal */
+  --apple-surface-hover:    #3a3a3c;               /* Apple Dark Hover / Highlight */
+  --apple-navy:             #1c1c1e;               /* Overridden navy for dark theme */
+  --apple-orange:           #fe8517;               /* Apple Dark System Orange */
+  --apple-text-1:           #f5f5f7;               /* High contrast primary text */
+  --apple-text-2:           #aeaeb2;               /* Secondary text */
+  --apple-text-3:           #86868b;               /* Tertiary text */
+  --apple-border:           rgba(255, 255, 255, 0.12); /* Hairline subtle border */
+  --apple-shadow-sm:        0 2px 8px rgba(0, 0, 0, 0.4);
+  --apple-shadow-md:        0 8px 30px rgba(0, 0, 0, 0.5);
+  --apple-shadow-lg:        0 20px 60px rgba(0, 0, 0, 0.65);
 }
 
+/* ── Base & Layout ─────────────────────────────────────── */
 html.dark-mode body {
   background-color: var(--apple-bg) !important;
   color: var(--apple-text-1) !important;
 }
 
-html.dark-mode .header.navbar-area,
-html.dark-mode .header-middle {
-  background: rgba(28,28,30,0.9) !important;
-  border-color: var(--apple-border) !important;
-}
-
-html.dark-mode .single-product {
-  background: var(--apple-surface) !important;
-}
-
-html.dark-mode .single-product .product-image {
-  background: #3a3a3c !important;
-}
-
-html.dark-mode .item-details .top-area {
-  background: var(--apple-surface) !important;
-}
-
-html.dark-mode .product-images #gallery .main-img img,
-html.dark-mode .product-images #gallery .images img {
-  background: #3a3a3c !important;
-}
-
-html.dark-mode .search-form input {
-  background: #3a3a3c !important;
-  border-color: var(--apple-border) !important;
+html.dark-mode h1, html.dark-mode h2, html.dark-mode h3, 
+html.dark-mode h4, html.dark-mode h5, html.dark-mode h6 {
   color: var(--apple-text-1) !important;
 }
 
-html.dark-mode .checkout-area input,
-html.dark-mode .checkout-area select,
-html.dark-mode .checkout-area textarea,
-html.dark-mode .checkout-area .form-control {
-  background: #3a3a3c !important;
-  border-color: var(--apple-border) !important;
+html.dark-mode p, html.dark-mode span, html.dark-mode label, 
+html.dark-mode li {
+  color: var(--apple-text-2);
+}
+
+html.dark-mode strong, html.dark-mode b {
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .text-muted {
+  color: var(--apple-text-3) !important;
+}
+
+/* ── Header & Navbar ───────────────────────────────────── */
+html.dark-mode .header.navbar-area,
+html.dark-mode .header-middle,
+html.dark-mode .header .header-middle {
+  background: rgba(24, 24, 26, 0.85) !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+  box-shadow: none !important;
+}
+
+html.dark-mode .topbar {
+  background-color: #161618 !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+}
+
+html.dark-mode .topbar select {
+  background-color: #161618 !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .topbar .useful-links li a,
+html.dark-mode .topbar .user-login li a,
+html.dark-mode .topbar .user {
+  color: var(--apple-text-2) !important;
+}
+
+html.dark-mode .topbar .useful-links li a:hover,
+html.dark-mode .topbar .user-login li a:hover {
+  color: var(--apple-orange) !important;
+}
+
+html.dark-mode .nav-hotline i {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: var(--apple-orange) !important;
+}
+
+html.dark-mode .nav-hotline h3 {
+  color: var(--apple-text-2) !important;
+}
+
+html.dark-mode .nav-hotline h3 span {
+  color: var(--apple-text-1) !important;
+}
+
+/* ── Cart Button & Theme Toggle Button ─────────────────── */
+html.dark-mode .header .navbar-cart .theme-toggle-btn,
+html.dark-mode .header .navbar-cart .cart-items .main-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #f5f5f7 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.dark-mode .header .navbar-cart .theme-toggle-btn:hover,
+html.dark-mode .header .navbar-cart .cart-items:hover .main-btn,
+html.dark-mode .header .navbar-cart .cart-items .main-btn:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: var(--apple-orange) !important;
+  border-color: var(--apple-orange) !important;
+  transform: scale(1.06) !important;
+}
+
+/* Cart Dropdown Menu */
+html.dark-mode .header .navbar-cart .cart-items .shopping-item {
+  background: #1c1c1e !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .dropdown-cart-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .dropdown-cart-header span,
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .dropdown-cart-header a {
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .shopping-list li {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .shopping-list li .content h4 a {
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .shopping-list li .content h4 a:hover {
+  color: var(--apple-orange) !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .shopping-list li .content .quantity {
+  color: #aeaeb2 !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .shopping-list li .cart-img {
+  background: #2c2c2e !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .bottom .total span {
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .header .navbar-cart .cart-items .shopping-item .bottom .total .total-amount {
+  color: var(--apple-orange) !important;
+  font-weight: 700 !important;
+}
+
+/* ── Product Cards ─────────────────────────────────────── */
+html.dark-mode .single-product {
+  background: var(--apple-surface) !important;
+  border: 1px solid var(--apple-border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+html.dark-mode .single-product:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+html.dark-mode .single-product .product-image {
+  background: #2c2c2e !important;
+}
+
+html.dark-mode .single-product .product-info {
+  background: var(--apple-surface) !important;
+}
+
+html.dark-mode .single-product .product-info .title a {
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .single-product .product-info .price span {
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .btn-atc-icon {
+  background: rgba(254, 133, 23, 0.85) !important;
+  border-color: var(--apple-orange) !important;
+  color: #ffffff !important;
+}
+
+/* ── Sections & Cards ──────────────────────────────────── */
+html.dark-mode .trending-product,
+html.dark-mode .hero-area,
+html.dark-mode .item-details,
+html.dark-mode .products-filter-page,
+html.dark-mode .checkout-area {
+  background-color: var(--apple-bg) !important;
+}
+
+html.dark-mode .breadcrumbs {
+  background: var(--apple-surface) !important;
+  border-bottom: 1px solid var(--apple-border) !important;
+}
+
+html.dark-mode .breadcrumbs .page-title,
+html.dark-mode .breadcrumb-nav li,
+html.dark-mode .breadcrumb-nav li a {
   color: var(--apple-text-1) !important;
 }
 
@@ -1792,9 +2007,161 @@ html.dark-mode .shipping-info li {
   border-color: var(--apple-border) !important;
 }
 
-html.dark-mode .breadcrumbs {
+html.dark-mode .shipping-info .media-body h5 {
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .shipping-info .media-body span {
+  color: var(--apple-text-2) !important;
+}
+
+/* ── Product Details Page ──────────────────────────────── */
+html.dark-mode .item-details .top-area {
   background: var(--apple-surface) !important;
+  border: 1px solid var(--apple-border) !important;
+}
+
+html.dark-mode .product-images #gallery .main-img img,
+html.dark-mode .product-images #gallery .images img {
+  background: #2c2c2e !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark-mode .product-info .title {
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .product-info .price {
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .product-info .info-text {
+  color: var(--apple-text-2) !important;
+}
+
+html.dark-mode .qty-btn {
+  background: #2c2c2e !important;
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .qty-btn:hover {
+  background: #3a3a3c !important;
+}
+
+html.dark-mode .qty-val {
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .btn-buy-now {
+  background: #fe8517 !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+
+html.dark-mode .btn-atc-details {
+  background: #2c2c2e !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  color: #f5f5f7 !important;
+}
+
+html.dark-mode .btn-atc-details:hover {
+  background: #fe8517 !important;
+  border-color: #fe8517 !important;
+  color: #ffffff !important;
+}
+
+/* ── Form Inputs & Controls ────────────────────────────── */
+html.dark-mode input[type="text"],
+html.dark-mode input[type="email"],
+html.dark-mode input[type="password"],
+html.dark-mode input[type="number"],
+html.dark-mode input[type="tel"],
+html.dark-mode textarea,
+html.dark-mode select,
+html.dark-mode .form-control {
+  background-color: #2c2c2e !important;
   border-color: var(--apple-border) !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode input::placeholder,
+html.dark-mode textarea::placeholder {
+  color: var(--apple-text-3) !important;
+}
+
+html.dark-mode input:focus,
+html.dark-mode textarea:focus,
+html.dark-mode select:focus,
+html.dark-mode .form-control:focus {
+  border-color: var(--apple-orange) !important;
+  background-color: #3a3a3c !important;
+  box-shadow: 0 0 0 3px rgba(254, 133, 23, 0.2) !important;
+}
+
+/* ── Tables & Shopping Cart Page ───────────────────────── */
+html.dark-mode table,
+html.dark-mode .table,
+html.dark-mode .shopping-cart-list,
+html.dark-mode .cart-single-list,
+html.dark-mode .shopping-summery {
+  background: var(--apple-surface) !important;
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode table thead th,
+html.dark-mode .table thead th,
+html.dark-mode .cart-list-head {
+  background: #2c2c2e !important;
+  color: var(--apple-text-1) !important;
+  border-color: var(--apple-border) !important;
+}
+
+html.dark-mode table tbody td,
+html.dark-mode .table tbody td,
+html.dark-mode .cart-single-list {
+  border-color: var(--apple-border) !important;
+  color: var(--apple-text-2) !important;
+}
+
+/* ── Checkout Page ─────────────────────────────────────── */
+html.dark-mode .checkout-container .card,
+html.dark-mode .checkout-order-summary {
+  background: var(--apple-surface) !important;
+  border: 1px solid var(--apple-border) !important;
+}
+
+html.dark-mode .activity-checkout .feed-item-list h5.font-size-16,
+html.dark-mode .checkout-order-summary .font-size-16.mb-0 {
+  color: var(--apple-text-1) !important;
+}
+
+html.dark-mode .card-radio {
+  background: #2c2c2e !important;
+  border-color: var(--apple-border) !important;
+}
+
+html.dark-mode .card-radio-input:checked + .card-radio {
+  background: rgba(254, 133, 23, 0.15) !important;
+  border-color: var(--apple-orange) !important;
+}
+
+html.dark-mode .checkout-order-summary .p-3.bg-light,
+html.dark-mode .checkout-order-summary .table tbody tr.bg-light {
+  background: #2c2c2e !important;
+}
+
+/* ── Footer ────────────────────────────────────────────── */
+html.dark-mode .footer {
+  background: #0d0d0f !important;
+  border-top: 1px solid var(--apple-border) !important;
+}
+
+html.dark-mode .footer-top {
+  border-bottom-color: var(--apple-border) !important;
+}
+
+html.dark-mode .footer-bottom .copyright p {
+  color: var(--apple-text-3) !important;
 }
 
 /* ── Shop Page Filter Card ─────────────────────────────── */
