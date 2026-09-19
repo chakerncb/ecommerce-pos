@@ -10,12 +10,10 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libzip-dev \
     libpq-dev \
-    libicu-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# PHP extensions Laravel/Filament need
-RUN docker-php-ext-configure intl \
-    && docker-php-ext-install \
+# PHP extensions Laravel typically needs
+RUN docker-php-ext-install \
     pdo_mysql \
     mbstring \
     exif \
@@ -23,7 +21,6 @@ RUN docker-php-ext-configure intl \
     bcmath \
     gd \
     zip \
-    intl \
     opcache
 
 # Composer
